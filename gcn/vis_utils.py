@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import networkx as nx
 
-# 1. import data
+# t1. import data
 n, c = 34, 4
 labels = np.random.randint(0,4, size=(n,))
 pos = np.random.uniform(-1,1, size=(n,2))
