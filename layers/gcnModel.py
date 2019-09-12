@@ -18,7 +18,6 @@ def gcn():
     loss = forward_loss(H1, Y, P, train_mask)
 
     # 2. backward
-
     dH1 = backward_grad(H1, Y, P, train_mask)  # n, c
 
     dW1, dH0 = backward_hidden(A, W1, dH1, H1_tilde, H1_hat)

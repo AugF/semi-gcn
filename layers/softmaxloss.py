@@ -1,5 +1,5 @@
 import numpy as np
-from layers.utils import onehot
+from layers.utils import onehot, sample_mask
 
 
 def softmax(X):
@@ -13,8 +13,9 @@ def _loss(X, Y, train_mask):
     cross_real = cross_sum * train_mask.reshape(-1, 1)
     return np.sum(cross_real)
 
-def backward(X, Y):
+def backward(X, Y, train_mask):
     dX = softmax(X) - Y
+    dX = dX * train_mask.reshape(-1, 1)
     return dX
 
 def main():
@@ -23,13 +24,16 @@ def main():
     y = np.random.randint(0, c, (n,))
     Y = onehot(y, c)
 
+    l = 2
+    train_mask = sample_mask(range(l), n)
+
     # forward
     softmax_X = softmax(X)
-    loss = _loss(softmax_X, Y)
+    loss = _loss(softmax_X, Y, train_mask)
 
     print(loss)
     # grad
-    grad = backward(X, Y)
+    grad = backward(X, Y, train_mask)
 
     # check-grad
     h = 1e-5
@@ -38,9 +42,9 @@ def main():
     for i in range(n):
         for j in range(c):
             X_copy[i, j] += h
-            loss1 = _loss(softmax(X_copy), Y)
+            loss1 = _loss(softmax(X_copy), Y, train_mask)
             X_copy[i, j] -= 2 * h
-            loss2 = _loss(softmax(X_copy), Y)
+            loss2 = _loss(softmax(X_copy), Y, train_mask)
             check_grad[i, j] = (loss1 - loss2) / (2*h)
             # recover
             X_copy[i, j] += h

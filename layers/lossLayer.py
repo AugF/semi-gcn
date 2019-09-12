@@ -9,11 +9,14 @@ def forward_loss(X, Y, A, train_mask):
     return loss + loss_reg
 
 def backward_grad(X, Y, A, train_mask):
-    grad_1 = backward(X, Y)
+    # loss
+    grad_1 = backward(X, Y, train_mask)
 
+    # reg
     fx = argsoftmax(X, beta=10)
     grad_reg = backward_regloss(fx, A)
-    grad_softargmax = backward_argsoftmax(X, 10, train_mask)
+    grad_softargmax = backward_argsoftmax(X, 10)
+
     grad_2 = grad_softargmax * grad_reg.reshape(-1, 1)
 
     grad = grad_1 + grad_2
@@ -47,7 +50,7 @@ def check_loss():
             X[i, j] += h
             loss1 = forward_loss(X, Y, A, train_mask)
             X[i, j] -= 2*h
-            loss2 = forward_loss(X, Y, A)
+            loss2 = forward_loss(X, Y, A, train_mask)
             check_grad[i, j] = (loss1 - loss2) / (2*h)
             X[i, j] += h
 
