@@ -1,4 +1,5 @@
 import numpy as np
+
 from layers.hiddenLayer import forward_hidden, backward_hidden
 from layers.lossLayer import forward_loss, backward_grad
 from layers.utils import prepare_gcn, numerical_grad

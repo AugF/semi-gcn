@@ -28,6 +28,8 @@ def sample_mask(idx, l):
 
 
 def prepare_gcn():
+    # return A, P, X, W0, W1, Y, train_mask
+    # just for train
     n, f, h, c =10, 4, 2, 3
 
     np.random.seed(1)
@@ -84,12 +86,12 @@ def load_data(dataset_str):
 
     # y is one-hot (n, 7)
     # 1. get adj
-    adj = nx.adjacency_matrix(nx.from_dict_of_lists(g))  # csr_matrix,  (2708, 2708)
+    adj = nx.adjacency_matrix(nx.from_dict_of_lists(graph))  # csr_matrix,  (2708, 2708) row compressed toarray
 
     index = parse_index_file("../data/ind.{}.test.index".format(dataset_str))  # 1708~2707 乱序
 
     # 2. get ordered features and labes
-    features = sp.vstack((allx, tx)).tolil()
+    features = sp.vstack((allx, tx)).tolil()  # lil_matrix, todense  position
     index_sorted = np.sort(index)
     features[index, ] = features[index_sorted, ]
 
@@ -97,15 +99,17 @@ def load_data(dataset_str):
     labels[index, ] = labels[index_sorted, ]
 
     # 3. get mask (n, 1)
-    train_list = np.arange(0, len(x))
-    val_list = np.arange(len(x), len(x) + 500)
-    test_list = np.arange(len(allx), len(allx) + len(tx))
+    train_list = np.arange(0, len(y))
+    val_list = np.arange(len(y), len(y) + 500)
+    test_list = np.arange(len(ally), len(ally) + len(ty))
 
     train_mask = sample_mask(train_list, labels.shape[0])
     val_mask = sample_mask(val_list, labels.shape[0])
     test_mask = sample_mask(test_list, labels.shape[0])
 
     # y_val[train_mask, ] = labels[train_mask, ]  mask的使用方法
+    return adj, features, labels, train_mask, val_mask, test_mask
+
 
 
 
