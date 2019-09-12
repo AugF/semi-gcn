@@ -1,10 +1,6 @@
 import numpy as np
+from layers.utils import onehot
 
-def onehot(y, c):
-    res = np.zeros((len(y), c))
-    for i, j in enumerate(y):
-        res[i, j] = 1
-    return res
 
 def softmax(X):
     exp_x = np.exp(X)
