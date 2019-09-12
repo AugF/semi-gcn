@@ -8,8 +8,10 @@ def softmax(X):
     softmax_x = exp_x / sum_x
     return softmax_x
 
-def _loss(X, Y):
-    return np.sum(-Y * np.log(X))
+def _loss(X, Y, train_mask):
+    cross_sum = -Y * np.log(X)
+    cross_real = cross_sum * train_mask.reshape(-1, 1)
+    return np.sum(cross_real)
 
 def backward(X, Y):
     dX = softmax(X) - Y

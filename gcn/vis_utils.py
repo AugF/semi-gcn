@@ -5,6 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import networkx as nx
 
+# todo abtract the interface
 # t1. import data
 n, c = 34, 4
 labels = np.random.randint(0,4, size=(n,))

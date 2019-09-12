@@ -25,7 +25,7 @@ def argsoftmax(X, beta):
 def backward_regloss(x, A):
     return np.dot((A + A.T), x)
 
-def backward_argsoftmax(X, beta):
+def backward_argsoftmax(X, beta, train_mask=None):
     # require n, c
     n, c = X.shape
     softmax_x = softmax_beta(X, beta=beta)  # beta * (j - yi) * softmax_x
@@ -35,6 +35,9 @@ def backward_argsoftmax(X, beta):
     j_yi = np.repeat(index.reshape(1, -1), n, axis=0) - x.reshape(-1, 1)                               # j-yi
 
     grad = beta * softmax_x * j_yi
+
+    # add train_mask
+    grad = grad * train_mask.reshape(-1, 1)
     return grad
 
 def main():
@@ -72,7 +75,7 @@ def main():
     # print("check_reg", check_reg)
 
     # check softargmax + reg
-    grad_softargmax = backward_argsoftmax(X, beta=10)
+    grad_softargmax = backward_argsoftmax(X, 10)
     grad = grad_softargmax * grad_reg.reshape(-1, 1)
     print("grad", grad)
 

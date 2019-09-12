@@ -1,11 +1,30 @@
 import numpy as np
 from layers.lossLayer import forward_loss, backward_grad, onehot
 
+
 def act(X):
     return np.maximum(X, 0)
 
+
 def backward_act(X):
     return np.where(X <= 0, 0, 1)
+
+
+def forward_hidden(X, A, W):
+    A_hat = np.dot(A, X)
+    A_tilde = np.dot(A_hat, W)
+    H = act(A_tilde)
+    return H, A_tilde, A_hat
+
+
+def backward_hidden(A, W, dH, A_tilde, A_hat):
+    dact = backward_act(A_tilde)
+    dW = np.dot(A_hat.T, dH * dact)
+
+    dAhat = np.dot(dH * dact, W.T)
+    dX = np.dot(A.T, dAhat)
+    return dW, dX
+
 
 def fun():
     # require H--(n, c)  before softmax
