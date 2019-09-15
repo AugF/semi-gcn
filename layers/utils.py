@@ -11,6 +11,12 @@ def onehot(y, c):
         res[i, j] = 1
     return res
 
+def l2_loss(X):
+    """for matrix, todo check correct"""
+    x_square = X ** 2
+    x_sum = np.sum(x_square, axis=1)
+    x_l2 = np.sqrt(x_sum)
+    return np.mean(x_l2)
 
 def parse_index_file(filename):
     # ind.dataset.test.index

@@ -45,7 +45,8 @@ def preprocess_features(features):
     r_inv[np.isinf(r_inv)] = 0.
     r_mat_inv = sp.diags(r_inv)
     features = r_mat_inv.dot(features)
-    return sparse_to_tuple(features)
+    # return sparse_to_tuple(features)
+    return features.todense()
 
 # prepare adj
 def normalize_adj(adj):
@@ -61,8 +62,28 @@ def normalize_adj(adj):
 def preprocess_adj(adj):
     """Preprocessing of adjacency matrix for simple GCN model and conversion to tuple representation."""
     adj_normalized = normalize_adj(adj + sp.eye(adj.shape[0]))
-    return sparse_to_tuple(adj_normalized)
+    # return sparse_to_tuple(adj_normalized)
+    return adj_normalized.todense()
 
 def preprocess_Delta(adj):
-    # todo sp.coo_matrix  sp.csr_matrix
-    pass
+    adj = adj.todense()
+    diag = np.diag(np.sum(adj, axis=1))
+    delta = diag - adj
+    return delta
+
+# prepare placeholders
+def construct_feed_dict(labels_mask, placeholders):
+    """Construct feed dictinary"""
+    feed_dict = dict()
+    feed_dict.update({placeholders['labels_mask']: labels_mask})
+    return feed_dict
+
+# prepare accuary
+def masked_accuracy(preds, labels, mask):
+    """Accuracy with masking"""
+    correct_predictions = np.equal(np.argmax(preds, axis=1), np.argmax(labels, axis=1))
+    accuracy_all = np.array(correct_predictions, dtype=np.int32)
+    mask = np.array(mask, dtype=np.int32)
+    mask /= np.mean(mask)
+    accuracy_all *= mask
+    return np.mean(accuracy_all)
