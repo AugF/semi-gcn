@@ -1,6 +1,6 @@
 from layers.softmaxloss import softmax, _loss, backward
 from layers.softmax_regularize import reg_loss, argsoftmax, backward_regloss, backward_argsoftmax
-from layers.utils import onehot, sample_mask
+from gcn.utils import onehot, sample_mask
 import numpy as np
 
 def forward_loss(X, Y, A, train_mask):

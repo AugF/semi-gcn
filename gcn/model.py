@@ -1,65 +1,126 @@
+from gcn.inits import masked_accuracy
+from gcn.layers import GraphConvolution
+from gcn.loss import forward_loss, backward_grad
+from gcn.loss import masked_softmax_cross_entropy_loss, masked_softmax_backward
+from gcn.utils import l2_loss
+
+import tensorflow as tf
+import numpy as np
+
+flags = tf.app.flags
+FLAGS = flags.FLAGS
+
+class Model(object):
+    """model """
+
+    def __init__(self):
+        """init feathers, labels, input_dim"""
+        # vars and placeholders
+        self.vars = {}
+        self.placeholders = {}
+
+        # layers
+        self.layers = []
+        # activations
+        self.activations = []
+
+        # special input and output
+        self.inputs = None
+        self.outputs = None
+
+        self.loss = 0
+        self.accuracy = 0
+
+    def _loss(self):
+        """return loss, grad"""
+        return NotImplementedError
+
+    def _accuracy(self):
+        """return accuracy"""
+        return NotImplementedError
+
+    def _backgrad(self):
+        """back grad"""
+        return NotImplementedError
+
+    def build(self):
+        self._build()
+
+        self.activations.append(self.inputs)
+        for layer in self.layers:
+            hidden = layer(self.activations[-1])  # the last element of current activations list
+            self.activations.append(hidden)
+
+        self.outputs = self.activations[-1]
+
+    def _build(self):
+        """add layers"""
+        return NotImplementedError
 
 
-class GCN(object):
-    """basic gcn model"""
-    def __init__(self, input_size, hidden_size, outpus_size, std=1e-4):
-        """init"""
-        self.params = {}
-        self.params["w1"] = 0
+class GCN(Model):
+    def __init__(self, placeholders, input_dim):
+        super(GCN, self).__init__()
+        self.inputs = placeholders['features']
+        self.input_dim = input_dim  # can easily get by self.inputs
+        self.output_dim = placeholders['labels'].shape[1]
 
+        self.placeholders = placeholders
 
-    def loss(self, X, y=None, res=0.0):
-        """compute loss"""
-        loss = 0
-        grads = 0
-        return loss, grads
+        self.build()
 
-    def train(self, X, y, X_val, y_val, learning_rate=1e-3,
-              learning_rate_decay=0.95, reg=5e-6, num_iters=100,
-              batch_size=200, verbose=False):
-        """train"""
-        num_train = X.shape[0]
-        iterations_per_epoch = max(num_train / batch_size, 1)
+    def _loss(self):
+        # Weight decay loss todo
+        for var in self.layers[0].vars.values():
+            self.loss += FLAGS.weight_decay * l2_loss(var)
 
-        # use sgd to optimize the parameters in self.mode
-        loss_history = []
-        train_acc_history = []
-        val_acc_history = []
+        # print("weight decay loss", self.loss)
+        # Cross entropy loss
+        self.loss += masked_softmax_cross_entropy_loss(self.outputs,
+                                                       self.placeholders['labels'],
+                                                       self.placeholders['labels_mask'])
 
-        for it in range(num_iters):
-            X_batch = None
-            y_batch = None
+    def _accuracy(self):
+        self.accuracy = masked_accuracy(self.outputs, self.placeholders['labels'],
+                                        self.placeholders['labels_mask'])
 
-            # TODO: Crate a random minibatch of training data and lables
-            pass
+    def _backgrad(self):
+        # update the gradient
+        grad_pre_layer = masked_softmax_backward(self.outputs,
+                                                 self.placeholders['labels'],
+                                                 self.placeholders['labels_mask'])
+        # update every layer
+        for layer in reversed(self.layers):
+            grad_weight, grad_pre_layer = layer.back(grad_pre_layer)
+            layer.vars['weight'] -= FLAGS.grad_step * grad_weight
 
-            loss, grads = self.loss(X_batch, y=y_batch, reg=reg)
-            loss_history.append(loss)
+    def one_train(self):
+        self._loss()
+        self._accuracy()
+        self._backgrad()
+        return self.loss, self.accuracy
 
-            # TODO: use the gradients in the grads dictonary to update the parameters of the network
+    def evaluate(self, y_val, val_mask):
+        self.placeholders['labels'] = y_val
+        self.placeholders['labels_mask'] = val_mask
+        self._loss()
+        self._accuracy()
+        return self.loss, self.accuracy
 
-            if verbose and it % 100 == 0:
-                print("iteration %d / %d: loss %f" (it, num_iters, loss))
-
-            # Every epoch, check train and val accuracy and decay learning rate
-            if it % iterations_per_epoch == 0:
-                # Check accuracy
-                train_acc = (self.predict(X_batch) == y_batch).mean()
-                val_acc = (self.predict(X_val) == y_val).mean()
-                train_acc_history.append(train_acc)
-                val_acc_history.append(val_acc)
-
-                # Decay learning rate
-                learning_rate *= learning_rate_decay
-
-            return {
-                "loss_history" : loss_history,
-                "train_acc_history": train_acc_history,
-                "val_acc_history": val_acc_history
-            }
-
-    def predict(self, X):
-        """predict"""
-        y_pred = None
-
-        return y_pred
+    def _build(self):
+        # input_dim, output_dim, placeholders, act, dropput, sparse_inputs
+        # attention! there are something else:
+        self.layers.append(GraphConvolution(input_dim=self.input_dim,
+                                            output_dim=FLAGS.hidden1,
+                                            placeholders=self.placeholders,
+                                            act=lambda x: np.maximum(x, 0),
+                                            back_act=lambda x: np.where(x <= 0, 0, 1),
+                                            dropout=True,
+                                            sparse_inputs=False))
+        self.layers.append(GraphConvolution(input_dim=FLAGS.hidden1,
+                                            output_dim=self.output_dim,
+                                            placeholders=self.placeholders,
+                                            act=lambda x: x,
+                                            back_act=lambda x: np.where(x == np.inf, 0, 1),
+                                            dropout=True,
+                                            sparse_inputs=False))

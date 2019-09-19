@@ -72,18 +72,23 @@ def preprocess_Delta(adj):
     return delta
 
 # prepare placeholders
-def construct_feed_dict(labels_mask, placeholders):
-    """Construct feed dictinary"""
+def construct_feed_dict(features, adj, delta, labels, labels_mask, placeholders):
+    """Construct feed dictionary."""
     feed_dict = dict()
+    feed_dict.update({placeholders['features']: features})
+    feed_dict.update({placeholders['adj']: adj})
+    feed_dict.update({placeholders['delta']: delta})
+    feed_dict.update({placeholders['labels']: labels})
     feed_dict.update({placeholders['labels_mask']: labels_mask})
+    # feed_dict.update({placeholders['num_features_nonzero']: features[1].shape})
     return feed_dict
 
 # prepare accuary
 def masked_accuracy(preds, labels, mask):
     """Accuracy with masking"""
     correct_predictions = np.equal(np.argmax(preds, axis=1), np.argmax(labels, axis=1))
-    accuracy_all = np.array(correct_predictions, dtype=np.int32)
-    mask = np.array(mask, dtype=np.int32)
+    accuracy_all = np.array(correct_predictions, dtype=np.float32)
+    mask = np.array(mask, dtype=np.float32)
     mask /= np.mean(mask)
     accuracy_all *= mask
     return np.mean(accuracy_all)

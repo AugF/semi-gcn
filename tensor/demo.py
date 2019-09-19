@@ -1,6 +1,6 @@
 import tensorflow as tf
 import numpy as np
-from layers.utils import onehot
+from gcn.utils import onehot
 
 n, c = 4, 3
 y = np.random.randint(0, c, (n,))

@@ -1,54 +1,78 @@
 import numpy as np
+from gcn.inits import init_dropout, init_Weight
 
-def onehot(y, c):
-    res = np.zeros((len(y), c))
-    for i, j in enumerate(y):
-        res[i, j] = 1
-    return res
 
-def softmax(X):
-    exp_x = np.exp(X)
-    sum_x = np.sum(exp_x, axis=1).reshape(-1, 1)
-    softmax_x = exp_x / sum_x
-    return softmax_x
+class Layer(object):
+    """Normal layer"""
+    def __init__(self):
+        """something special: w1, sparse_flag,"""
+        self.vars = {}
+        self.sparse_inputs = False
 
-def _loss(X, Y):
-    return np.sum(-Y * np.log(X))
+    def _call(self, inputs):
+        """return output? no layers"""
+        # tensorflow just use numerical ways, so grad only needs _call. don't need backward.
+        return inputs
 
-def backward(X, Y):
-    dX = softmax(X) - Y
-    return dX
+    def __call__(self, inputs):
+        outputs = self._call(inputs)
+        return outputs
 
-def main():
-    n, c = 4, 3
-    X = np.random.random((n, c))
-    y = np.random.randint(0, c, (n,))
-    Y = onehot(y, c)
+    def back(self, grad_pre_layer):
+        return NotImplementedError
 
-    # forward
-    softmax_X = softmax(X)
-    loss = _loss(softmax_X, Y)
 
-    print(loss)
-    # grad
-    grad = backward(X, Y)
+class GraphConvolution(Layer):
+    """Graph Convolution Layer"""
+    def __init__(self, input_dim, output_dim, placeholders, dropout=0.,
+                 sparse_inputs=False, act=lambda x: x,
+                 back_act=lambda x: np.where(x == np.inf, 0, 1), bias=False, featureless=False):
+        """init function"""
+        super(GraphConvolution, self).__init__()
 
-    # check-grad
-    h = 1e-5
-    X_copy = np.copy(X)
-    check_grad = np.zeros((n, c))
-    for i in range(n):
-        for j in range(c):
-            X_copy[i, j] += h
-            loss1 = _loss(softmax(X_copy), Y)
-            X_copy[i, j] -= 2 * h
-            loss2 = _loss(softmax(X_copy), Y)
-            check_grad[i, j] = (loss1 - loss2) / (2*h)
-            # recover
-            X_copy[i, j] += h
+        if dropout:
+            self.dropout = placeholders['dropout']
+        else:
+            self.dropout = 0.
 
-    print(grad)
-    print(check_grad)
+        self.act = act
+        self.back_act = back_act
+        self.support = placeholders['adj']
+        self.sparse_inputs = sparse_inputs
+        self.featureless = featureless  # ??
+        self.bias = bias
 
-if __name__ == '__main__':
-    main()
+        # init weight
+        self.vars['weight'] = init_Weight([input_dim, output_dim])
+        # if bias, init bias
+        if self.bias:
+            self.vars['bias'] = np.zeros([output_dim])
+
+    def _call(self, inputs):
+        """call: forward function"""
+        x = inputs
+
+        # drop put
+        if self.sparse_inputs:
+            pass  # todo finish sp
+        else:
+            x = init_dropout(inputs.shape, self.dropout)
+
+        # convolve  what is featureless
+        self.hidden_hat = np.dot(self.support, x)
+        self.hidden_tilde = np.dot(self.hidden_hat, self.vars['weight'])
+
+        # bias
+        if self.bias:
+            self.hidden_tilde += self.vars['bias']
+        return self.act(self.hidden_tilde)
+
+    def back(self, grad_pre_layer):
+        """back: backward"""
+        grad_act = self.back_act(self.hidden_tilde)
+        # dW
+        grad_weight = np.dot(self.hidden_hat.T, np.multiply(grad_pre_layer, grad_act))
+        # dX
+        grad_temp = np.dot(np.multiply(grad_pre_layer, grad_act), self.vars['weight'].T)
+        grad_input = np.dot(self.support.T, grad_temp)
+        return grad_weight, grad_input

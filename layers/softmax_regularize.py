@@ -1,5 +1,5 @@
 import numpy as np
-from layers.utils import numerical_grad
+from gcn.utils import numerical_grad
 
 
 def reg_loss(x, A):

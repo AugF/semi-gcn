@@ -1,5 +1,5 @@
 import numpy as np
-from layers.utils import onehot, sample_mask
+from gcn.utils import onehot, sample_mask
 
 
 def softmax(X):

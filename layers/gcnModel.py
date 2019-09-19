@@ -1,8 +1,6 @@
-import numpy as np
-
 from layers.hiddenLayer import forward_hidden, backward_hidden
 from layers.lossLayer import forward_loss, backward_grad
-from layers.utils import prepare_gcn, numerical_grad
+from gcn.utils import prepare_gcn, numerical_grad
 
 def gcn():
     A, P, X, W0, W1, Y, train_mask = prepare_gcn()
