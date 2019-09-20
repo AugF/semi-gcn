@@ -43,7 +43,7 @@ class LogisticModel:
                            [0.88, -1.08, 0.15],
                            [0.52, 0.06, -1.30],
                            [0.74, -2.49, 1.39]])
-        targets = np.array([True, True, False, True])
+        targets = np.array([1., 1., 0., 1.])
         return inputs, targets
 
     def training_loss(self, weights):
@@ -95,25 +95,30 @@ def test_sgd(epochs=1000, training_loss=LogisticModel().training_loss):
     print("weights: {}".format(weights))
 
 
-def test_adam(epochs=1000):
+def test_adam(step=1, epochs=1000):
     weights = np.array([0., 0., 0.])
     # lgmodel
     lgmodel = LogisticModel()
-    training_loss = lgmodel.training_loss
+    inputs, targets, training_loss = lgmodel.inputs, lgmodel.targets, lgmodel.training_loss
     # adam
+    print("adam")
     adam = Adam(weights=weights, grad_function=grad(training_loss), learning_rate=0.01)
     for i in range(epochs):
+        weights = adam.theta_t
         adam.minimize()
-        preds = lgmodel.logistic_predictions(adam.theta_t)
-        label_pro = preds * lgmodel.targets + (1 - preds) * (1 - lgmodel.targets)
-        label_pro_log = grad_np.log(label_pro)
-        print("iteration: ", i)
-        print("preds", preds)
-        print("labels_pro", label_pro)
-        print("lable_pro_log", label_pro_log)
-        print("loss: {}".format(training_loss(adam.theta_t)))
-        print("weights: {}".format(adam.theta_t))
+        dot1 = np.dot(inputs, weights)
+        preds = 0.5 * (np.tanh(dot1) + 1)
+        labels_pro = preds * targets + (1 - preds) * (1 - targets)
+        log_pro = np.log(labels_pro)
+        loss = - np.sum(log_pro)
+        print(dot1)
+        print(preds)
+        print(labels_pro)
+        print(log_pro)
+        print(loss)
         break
+        # if i % step == 0:
+        #     print("iteration: {}, loss: {}, weights: {}".format(i, loss, adam.theta_t))
 
 
 if __name__ == '__main__':
