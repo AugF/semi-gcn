@@ -87,6 +87,10 @@ def sgd(epochs=1000):
 
 
 if __name__ == "__main__":
-    training_gradient_fun = grad(training_loss)
-    gradient = training_gradient_fun(weights)
-    print(gradient)
+	adam = Adam(training_loss, weights, lr=0.01)
+	print("start to optimize:")
+	# adam.minimize_show(epochs=EPOCHS)
+
+	for i in range(EPOCHS):
+		adam.minimize()
+	print("weights:{} loss:{}".format(adam.theta, adam.loss(adam.theta)))
