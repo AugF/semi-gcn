@@ -2,26 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3f3a8e00-f8ab-4d27-99d9-71e9e35a06df" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/ReadMe.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gcn/loss.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gcn/train.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tensor/ex1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gcn/data_utils.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gcn/layers.py" beforeDir="false" afterPath="$PROJECT_DIR$/gcn/layers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gcn/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/gcn/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gcn/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/gcn/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gcn/vis_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/gcn/vis_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layers/flags.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/layers/gcnModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/layers/gcnModel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layers/inits.py" beforeDir="false" afterPath="$PROJECT_DIR$/gcn/inits.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layers/lossLayer.py" beforeDir="false" afterPath="$PROJECT_DIR$/layers/lossLayer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layers/model.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/layers/softmax_regularize.py" beforeDir="false" afterPath="$PROJECT_DIR$/layers/softmax_regularize.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layers/softmaxloss.py" beforeDir="false" afterPath="$PROJECT_DIR$/layers/softmaxloss.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layers/utils.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/layers/vis_utils.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tensor/demo.py" beforeDir="false" afterPath="$PROJECT_DIR$/tensor/demo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tensor/ex1.py" beforeDir="false" afterPath="$PROJECT_DIR$/tensor/ex1.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -76,8 +57,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tensor/ex1.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
+            <state relative-caret-position="404">
+              <caret line="53" selection-start-line="53" selection-end-line="53" />
               <folding>
                 <element signature="e#21#39#0" expanded="true" />
               </folding>
@@ -464,12 +445,12 @@
       <workItem from="1568560241610" duration="2971000" />
       <workItem from="1568803239605" duration="1347000" />
       <workItem from="1568894717837" duration="4746000" />
-      <workItem from="1568933801205" duration="3403000" />
+      <workItem from="1568933801205" duration="6490000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="167174000" />
+    <option name="totallyTimeSpent" value="170261000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -498,8 +479,8 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.40114614" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.31161472" />
-      <window_info active="true" anchor="bottom" id="Python Console" order="12" visible="true" weight="0.3800657" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.31106243" />
+      <window_info anchor="bottom" id="Python Console" order="12" weight="0.73493975" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -663,23 +644,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/layers/hiddenLayer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/layers/gcnModel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="47" lean-forward="true" selection-start-line="2" selection-start-column="47" selection-end-line="2" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_bundle/pydev_import_hook.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
@@ -786,16 +750,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gcn/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="13" selection-start-line="13" selection-end-line="13" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gcn/loss.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
@@ -827,10 +781,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/layers/gcnModel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="47" lean-forward="true" selection-start-line="2" selection-start-column="47" selection-end-line="2" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/layers/hiddenLayer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gcn/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/tensor/ex1.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
+        <state relative-caret-position="404">
+          <caret line="53" selection-start-line="53" selection-end-line="53" />
           <folding>
             <element signature="e#21#39#0" expanded="true" />
           </folding>
