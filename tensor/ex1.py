@@ -1,7 +1,9 @@
 """adam optimizer"""
-import autograd.numpy as np  # autograd must use numpy
+import autograd.numpy as grad_np  # autograd must use numpy
 import tensorflow as tf
 from autograd import grad
+import numpy as np
+
 
 class Adam:
     """adam optimizer"""
@@ -27,53 +29,61 @@ class Adam:
         self.theta_t -= alpha_t * self.m_t / (self.v_t ** 0.5 + self.epsilon)
 
 
-# build a toy dataset: numbers=4
-inputs = np.array([[0.52, 1.12,  0.77],
-                   [0.88, -1.08, 0.15],
-                   [0.52, 0.06, -1.30],
-                   [0.74, -2.49, 1.39]])
-targets = np.array([True, True, False, True])
-weights = np.array([0.0, 0.0, 0.0])
+class LogisticModel:
+    """logistic mode"""
+    def __init__(self, epochs=1000):
+        self.epochs = epochs
+        self.inputs, self.targets = self.prepare_data()
+        self.weights = np.zeros(self.inputs.shape[1], dtype=np.float)
 
-# define loss
-def sigmoid(x):
-    return 0.5*(np.tanh(x) + 1)
+    @staticmethod
+    def prepare_data():
+        """build a toy dataset"""
+        inputs = np.array([[0.52, 1.12, 0.77],
+                           [0.88, -1.08, 0.15],
+                           [0.52, 0.06, -1.30],
+                           [0.74, -2.49, 1.39]])
+        targets = np.array([True, True, False, True])
+        return inputs, targets
 
-def logistic_predictions(weights, inputs):
-    # Outputs probability of a label being true according to logistic model.
-    return sigmoid(np.dot(inputs, weights))
+    def training_loss(self, weights):
+        # Training loss is the negative log-likelihood of the training labels.
+        preds = self.logistic_predictions(weights, self.inputs)
+        label_probabilities = preds * self.targets + (1 - preds) * (1 - self.targets)
+        return -grad_np.sum(grad_np.log(label_probabilities))
 
-def training_loss(weights):
-    # Training loss is the negative log-likelihood of the training labels.
-    preds = logistic_predictions(weights, inputs)
-    label_probabilities = preds * targets + (1 - preds) * (1 - targets)
-    return -np.sum(np.log(label_probabilities))
+    def logistic_predictions(self, weights, inputs):
+        return self.sigmoid(grad_np.dot(inputs, weights))
 
-# check loss
-def numerical_loss(funciton, weights):
-    """weigths: 1 dimension array"""
-    h = 1e-8
-    numerical_grad = np.zeros(weights.shape)
+    def sigmoid(self, x):
+        return 0.5*(grad_np.tanh(x) + 1)
 
-    for i in range(weights.shape[0]):
+    def numerical_loss(self, function, weights):
+        """tools, weights: 1 dimension array"""
+        h = 1e-8
+        numerical_grad = np.zeros(weights.shape)
+        for i in range(weights.shape[0]):
             weights[i] += h
-            loss1 = training_loss(weights)
-            weights[i] -= 2*h
-            loss2 = training_loss(weights)
-            numerical_grad[i] = (loss1 - loss2) / (2*h)
+            loss1 = function(weights)
+            weights[i] -= 2 * h
+            loss2 = function(weights)
+            numerical_grad[i] = (loss1 - loss2) / (2 * h)
             weights[i] += h
+        return numerical_grad
 
-    return numerical_grad
 
 def test_autograd():
     """test whether grad in autograd is true"""
+    lgmodel = LogisticModel()
+    numerical_loss, training_loss = lgmodel.numerical_loss, lgmodel.training_loss
+    weights = np.array([0., 0., 0.])
     print("numerical_grad", numerical_loss(training_loss, weights))
     training_gradient_fun = grad(training_loss)
     gradient = training_gradient_fun(weights)
     print("gradient", gradient)
 
 # sgd
-def sgd(epochs=1000):
+def test_sgd(epochs=1000, training_loss=LogisticModel().training_loss):
     """stochastic according to inputs in loss function.inputs not need to be entire dataset."""
     grad_function = grad(training_loss)
     weights = np.array([0., 0., 0.])
@@ -83,7 +93,7 @@ def sgd(epochs=1000):
     print("Trained loss: {}".format(training_loss(weights)))
     print("weights: {}".format(weights))
 
-def test_adam(epochs=1000):
+def test_adam(epochs=1000, training_loss=LogisticModel().training_loss):
     weights = np.array([0., 0., 0.])
     adam = Adam(weights=weights, grad_function=grad(training_loss), learning_rate=0.01)
     for i in range(epochs):
@@ -92,16 +102,13 @@ def test_adam(epochs=1000):
     print("weights: {}".format(adam.theta_t))
 
 # tensorflow
-# tf_var = tf.get_variable("var", initializer=tf.constant(theta_t))
-# loss = tf.math.reduce_mean(tf_var)
-# optimizer = tf.train.AdamOptimizer()
-# opt_op = optimizer.compute_gradients(loss, tf_var)
-#
-# sess = tf.Session()
+
 #
 # for _ in range(10):
 #     res = sess.run(opt_op)
 #     print("res", res)
 
 if __name__ == '__main__':
+    test_autograd()
+    test_sgd()
     test_adam()
