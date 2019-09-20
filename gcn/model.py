@@ -1,6 +1,5 @@
 from gcn.inits import masked_accuracy
 from gcn.layers import GraphConvolution
-from gcn.loss import forward_loss, backward_grad
 from gcn.loss import masked_softmax_cross_entropy_loss, masked_softmax_backward
 from gcn.utils import l2_loss
 
@@ -9,6 +8,7 @@ import numpy as np
 
 flags = tf.app.flags
 FLAGS = flags.FLAGS
+
 
 class Model(object):
     """model """
@@ -71,8 +71,8 @@ class GCN(Model):
 
     def _loss(self):
         # Weight decay loss todo
-        for var in self.layers[0].vars.values():
-            self.loss += FLAGS.weight_decay * l2_loss(var)
+        # for var in self.layers[0].vars.values():
+        #     self.loss += FLAGS.weight_decay * l2_loss(var)
 
         # print("weight decay loss", self.loss)
         # Cross entropy loss
@@ -91,8 +91,22 @@ class GCN(Model):
                                                  self.placeholders['labels_mask'])
         # update every layer
         for layer in reversed(self.layers):
-            grad_weight, grad_pre_layer = layer.back(grad_pre_layer)
-            layer.vars['weight'] -= FLAGS.grad_step * grad_weight
+            grad_weight, grad_pre_layer = layer.back(grad_pre_layer)  # weight
+            layer.vars['weight'] -= 0.00001 * grad_weight
+            # layer.vars['weight'] = layer.adam.minimize(grad_weight)  # adam
+
+    def check_grad(self, weights):
+        # check grad is true
+        h = 1e-8
+        grad_weights = np.zeros(weights.shape)
+        for i in weights.shape[0]:
+            for j in weights.shape[1]:
+                grad_weights[i, j] += h
+                grad_weights[i, j] -= 2*h
+
+    def _forward(self):
+        for layer in self.layers:
+            layer.call()
 
     def one_train(self):
         self._loss()

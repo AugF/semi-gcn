@@ -68,13 +68,13 @@ for epoch in range(FLAGS.epochs):
     cost_val.append(val_loss)
 
     # Print results
-    print("Epoch:", '%04d' % (epoch + 1), "train_loss=", "{:.5f}".format(train_loss),
-          "train_acc=", "{:.5f}".format(train_acc), "val_loss=", "{:.5f}".format(val_loss),
+    print("Epoch:", '%04d' % (epoch + 1), "train_loss=", "{:.6f}".format(train_loss),
+          "train_acc=", "{:.6f}".format(train_acc), "val_loss=", "{:.5f}".format(val_loss),
           "val_acc=", "{:.5f}".format(val_acc), "time=", "{:.5f}".format(time.time() - t))
 
-    if epoch > FLAGS.early_stopping and cost_val[-1] > np.mean(cost_val[-(FLAGS.early_stopping+1):-1]):
-        print("Early stopping...")
-        break
+    # if epoch > FLAGS.early_stopping and cost_val[-1] > np.mean(cost_val[-(FLAGS.early_stopping+1):-1]):
+    #     print("Early stopping...")
+    #     break
 
 print("Optimization Finished!")
 

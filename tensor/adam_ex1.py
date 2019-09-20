@@ -1,6 +1,5 @@
 """adam optimizer"""
 import autograd.numpy as grad_np  # autograd must use numpy
-import tensorflow as tf
 from autograd import grad
 import numpy as np
 
@@ -111,14 +110,13 @@ def test_adam(step=1, epochs=1000):
         labels_pro = preds * targets + (1 - preds) * (1 - targets)
         log_pro = np.log(labels_pro)
         loss = - np.sum(log_pro)
-        print(dot1)
-        print(preds)
-        print(labels_pro)
-        print(log_pro)
-        print(loss)
-        break
-        # if i % step == 0:
-        #     print("iteration: {}, loss: {}, weights: {}".format(i, loss, adam.theta_t))
+        # print(dot1)
+        # print(preds)
+        # print(labels_pro)
+        # print(log_pro)
+        # print(loss)
+        if i % step == 0:
+            print("iteration: {}, loss: {}, weights: {}".format(i, loss, adam.theta_t))
 
 
 if __name__ == '__main__':

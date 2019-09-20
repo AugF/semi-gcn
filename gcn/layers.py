@@ -1,12 +1,13 @@
 import numpy as np
 from gcn.inits import init_dropout, init_Weight
-
+from gcn.adam import Adam
 
 class Layer(object):
     """Normal layer"""
     def __init__(self):
         """something special: w1, sparse_flag,"""
         self.vars = {}
+        self.adam = None
         self.sparse_inputs = False
 
     def _call(self, inputs):
@@ -44,11 +45,15 @@ class GraphConvolution(Layer):
 
         # init weight
         self.vars['weight'] = init_Weight([input_dim, output_dim])
+
+        # init adam
+        self.adam = Adam(weights=self.vars['weight'])
+
         # if bias, init bias
         if self.bias:
             self.vars['bias'] = np.zeros([output_dim])
 
-    def _call(self, inputs):
+    def call(self, inputs):
         """call: forward function"""
         x = inputs
 
@@ -72,7 +77,7 @@ class GraphConvolution(Layer):
         grad_act = self.back_act(self.hidden_tilde)
         # dW
         grad_weight = np.dot(self.hidden_hat.T, np.multiply(grad_pre_layer, grad_act))
-        # dX
+        # dX  todo only there is about weight
         grad_temp = np.dot(np.multiply(grad_pre_layer, grad_act), self.vars['weight'].T)
         grad_input = np.dot(self.support.T, grad_temp)
         return grad_weight, grad_input
