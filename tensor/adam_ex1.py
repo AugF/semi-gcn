@@ -48,12 +48,13 @@ class LogisticModel:
 
     def training_loss(self, weights):
         # Training loss is the negative log-likelihood of the training labels.
-        preds = self.logistic_predictions(weights, self.inputs)
+        preds = self.logistic_predictions(weights)
         label_probabilities = preds * self.targets + (1 - preds) * (1 - self.targets)
-        return -grad_np.sum(grad_np.log(label_probabilities))
+        label_pro_log = grad_np.log(label_probabilities)
+        return -grad_np.sum(label_pro_log)
 
-    def logistic_predictions(self, weights, inputs):
-        return self.sigmoid(grad_np.dot(inputs, weights))
+    def logistic_predictions(self, weights):
+        return self.sigmoid(grad_np.dot(self.inputs, weights))
 
     def sigmoid(self, x):
         return 0.5*(grad_np.tanh(x) + 1)
@@ -82,7 +83,7 @@ def test_autograd():
     gradient = training_gradient_fun(weights)
     print("gradient", gradient)
 
-# sgd
+
 def test_sgd(epochs=1000, training_loss=LogisticModel().training_loss):
     """stochastic according to inputs in loss function.inputs not need to be entire dataset."""
     grad_function = grad(training_loss)
@@ -93,22 +94,27 @@ def test_sgd(epochs=1000, training_loss=LogisticModel().training_loss):
     print("Trained loss: {}".format(training_loss(weights)))
     print("weights: {}".format(weights))
 
-def test_adam(epochs=1000, training_loss=LogisticModel().training_loss):
+
+def test_adam(epochs=1000):
     weights = np.array([0., 0., 0.])
+    # lgmodel
+    lgmodel = LogisticModel()
+    training_loss = lgmodel.training_loss
+    # adam
     adam = Adam(weights=weights, grad_function=grad(training_loss), learning_rate=0.01)
     for i in range(epochs):
         adam.minimize()
-    print("Trained loss: {}".format(training_loss(adam.theta_t)))
-    print("weights: {}".format(adam.theta_t))
+        preds = lgmodel.logistic_predictions(adam.theta_t)
+        label_pro = preds * lgmodel.targets + (1 - preds) * (1 - lgmodel.targets)
+        label_pro_log = grad_np.log(label_pro)
+        print("iteration: ", i)
+        print("preds", preds)
+        print("labels_pro", label_pro)
+        print("lable_pro_log", label_pro_log)
+        print("loss: {}".format(training_loss(adam.theta_t)))
+        print("weights: {}".format(adam.theta_t))
+        break
 
-# tensorflow
-
-#
-# for _ in range(10):
-#     res = sess.run(opt_op)
-#     print("res", res)
 
 if __name__ == '__main__':
-    test_autograd()
-    test_sgd()
-    test_adam()
+    test_adam(20)
