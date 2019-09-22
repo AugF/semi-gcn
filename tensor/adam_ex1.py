@@ -3,6 +3,9 @@ import autograd.numpy as grad_np  # autograd must use numpy
 from autograd import grad
 import numpy as np
 
+def wrapper(x):
+    """wrapper for print"""
+    return x.reshape(x.shape[0])
 
 class Adam:
     """adam optimizer"""
@@ -22,9 +25,9 @@ class Adam:
         """more efficient"""
         self.t += 1
         g_t = self.grad_function(self.theta_t)
+        alpha_t = self.learning_rate * ((1 - self.beta_2 ** self.t) ** 0.5) / (1 - self.beta_1 ** self.t)
         self.m_t = self.beta_1 * self.m_t + (1 - self.beta_1) * g_t
         self.v_t = self.beta_2 * self.v_t + (1 - self.beta_2) * g_t * g_t
-        alpha_t = self.learning_rate * ((1 - self.beta_2 ** self.t) ** 0.5) / (1 - self.beta_1 ** self.t)
         self.theta_t -= alpha_t * self.m_t / (self.v_t ** 0.5 + self.epsilon)
 
 
@@ -42,7 +45,7 @@ class LogisticModel:
                            [0.88, -1.08, 0.15],
                            [0.52, 0.06, -1.30],
                            [0.74, -2.49, 1.39]])
-        targets = np.array([1., 1., 0., 1.])
+        targets = np.array([1., 1., 0., 1.]).reshape(-1, 1)
         return inputs, targets
 
     def training_loss(self, weights):
@@ -56,7 +59,7 @@ class LogisticModel:
         return self.sigmoid(grad_np.dot(self.inputs, weights))
 
     def sigmoid(self, x):
-        return 0.5*(grad_np.tanh(x) + 1)
+        return 1 / (1 + grad_np.exp(-x))
 
     def numerical_loss(self, function, weights):
         """tools, weights: 1 dimension array"""
@@ -103,20 +106,15 @@ def test_adam(step=1, epochs=1000):
     print("adam")
     adam = Adam(weights=weights, grad_function=grad(training_loss), learning_rate=0.01)
     for i in range(epochs):
-        weights = adam.theta_t
+        weights = adam.theta_t.copy().reshape(-1, 1)
         adam.minimize()
         dot1 = np.dot(inputs, weights)
-        preds = 0.5 * (np.tanh(dot1) + 1)
+        preds = 1 / (1 + np.exp(-dot1))  # y = 1 / (1+e^{-x})
         labels_pro = preds * targets + (1 - preds) * (1 - targets)
         log_pro = np.log(labels_pro)
         loss = - np.sum(log_pro)
-        # print(dot1)
-        # print(preds)
-        # print(labels_pro)
-        # print(log_pro)
-        # print(loss)
         if i % step == 0:
-            print("iteration: {}, loss: {}, weights: {}".format(i, loss, adam.theta_t))
+            print("iteration: {}, loss: {}, weights: {}, preds: {}, labels_pro: {}".format(i, loss, adam.theta_t, wrapper(preds), wrapper(labels_pro)))
 
 
 if __name__ == '__main__':

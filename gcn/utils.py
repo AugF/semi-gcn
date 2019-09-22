@@ -36,26 +36,29 @@ def sample_mask(idx, l):
 
 
 def prepare_gcn():
-    # return A, P, X, W0, W1, Y, train_mask
-    # just for train
-    n, f, h, c =10, 4, 2, 3
+    # adj, features, labels, train_mask
+    n, f, c = 10, 4, 3
 
     np.random.seed(1)
-    A = np.random.random((n, n))  #
-    P = np.random.random((n, n))  # reg
-    X = np.random.random((n, f)) # features
-
-    W0 = np.random.random((f, h))
-    W1 = np.random.random((h, c))
+    adj = np.random.random((n, n))
+    features = np.random.random((n, f))
 
     y = np.random.randint(0, c, (n, ))
-    Y = onehot(y, c)
+    labels = onehot(y, c)
 
-    # prepare y_mask
-    l = 2
-    train_mask = sample_mask(range(l), n)
+    # prepare train_mask
+    train_mask = sample_mask(range(2), n)
+    val_mask = sample_mask(range(2, 5), n)
+    test_mask = sample_mask(range(8, 10), n)
 
-    return A, P, X, W0, W1, Y, train_mask
+    y_train = np.zeros(labels.shape)
+    y_val = np.zeros(labels.shape)
+    y_test = np.zeros(labels.shape)
+
+    y_train[train_mask, :] = labels[train_mask, :]
+    y_val[val_mask, :] = labels[val_mask, :]
+    y_test[test_mask, :] = labels[test_mask, :]
+    return adj, features, y_train, y_val, y_test, train_mask, val_mask, test_mask
 
 
 def numerical_grad(f, X, h=1e-5):
@@ -71,6 +74,7 @@ def numerical_grad(f, X, h=1e-5):
             grad[i, j] = (loss1 - loss2) / (2*h)
             X[i, j] += h
     return grad
+
 
 def load_data(dataset_str):
     names = ['x', 'y', 'tx', 'ty', 'allx', 'ally', 'graph']

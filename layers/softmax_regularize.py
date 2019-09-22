@@ -3,8 +3,9 @@ from gcn.utils import numerical_grad
 
 
 def reg_loss(x, A):
-    loss = np.dot(np.dot(x.T, A), x)
-    return loss
+    print("reg_loss", x.shape, A.shape)
+    loss = np.dot(np.dot(x, A), x.T)  # todo  loss=[[1.2]]
+    return loss[0][0]
 
 
 def softmax_beta(X, beta):
@@ -23,7 +24,7 @@ def argsoftmax(X, beta):
     return x
 
 def backward_regloss(x, A):
-    return np.dot((A + A.T), x)
+    return np.dot((A + A.T), x.T)   # ??
 
 def backward_argsoftmax(X, beta):
     # require n, c
@@ -34,7 +35,7 @@ def backward_argsoftmax(X, beta):
     x = np.dot(softmax_x, index)
     j_yi = np.repeat(index.reshape(1, -1), n, axis=0) - x.reshape(-1, 1)                               # j-yi
 
-    grad = beta * softmax_x * j_yi
+    grad = beta * np.multiply(softmax_x, j_yi)
     return grad
 
 def main():

@@ -1,5 +1,5 @@
-from gcn.utils import load_data
-from gcn.inits import preprocess_adj, preprocess_features, preprocess_Delta
+from gcn.utils import load_data, prepare_gcn
+from gcn.inits import preprocess_adj, preprocess_features
 from gcn.model import GCN
 
 import time
@@ -18,7 +18,7 @@ flags.DEFINE_string('dataset', 'cora', 'Dataset string.')  # 'cora', 'citeseer',
 flags.DEFINE_string('model', 'gcn', 'Model string.')  # 'gcn', 'gcn_cheby', 'dense'
 flags.DEFINE_float('learning_rate', 0.01, 'Initial learning rate.')
 flags.DEFINE_integer('epochs', 200, 'Number of epochs to train.')
-flags.DEFINE_integer('hidden1', 16, 'Number of units in hidden layer 1.')
+flags.DEFINE_integer('hidden1', 2, 'Number of units in hidden layer 1.')
 flags.DEFINE_float('dropout', 0.5, 'Dropout rate (1 - keep probability).')
 flags.DEFINE_float('grad_step', 0.2, 'grad step')
 flags.DEFINE_float('weight_decay', 5e-4, 'Weight for L2 loss on embedding matrix.')
@@ -28,22 +28,22 @@ flags.DEFINE_integer('max_degree', 3, 'Maximum Chebyshev polynomial degree.')
 # 1. prepare data
 # step 1. get original data
 # adj--A,  features--X, labels--Y , train_mask, val_mask, test_mask
-adj, features, y_train, y_val, y_test, train_mask, val_mask, test_mask = load_data("cora")
+adj, features, y_train, y_val, y_test, train_mask, val_mask, test_mask = prepare_gcn()
 
 # step 2. get preprocessed data
 
-delta = preprocess_Delta(adj)
+# delta = preprocess_Delta(adj)
 
 # a. get symmetrically normalize adj matrix  (position_list, value_list, shape)
-adj = preprocess_adj(adj)   # every layer is the same
+# adj = preprocess_adj(adj)   # every layer is the same
 # b. row normalize features,  same to adj
-features = preprocess_features(features)
+# features = preprocess_features(features)
 
 # warp to placeholders
 placeholders = {
     'features': features,
     'adj':  adj,
-    'delta': delta,
+    # 'delta': delta,
     'dropout': 0.5,
     'labels_mask': train_mask,  # just for train
     'labels': y_train,          # onehot
@@ -58,7 +58,6 @@ model = GCN(placeholders, input_dim=features.shape[1])
 cost_val = []
 
 for epoch in range(FLAGS.epochs):
-# for epoch in range(5):  # just for debug
     t = time.time()
     # Training step
     train_loss, train_acc = model.one_train()

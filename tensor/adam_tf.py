@@ -7,6 +7,7 @@ def wrapper(x):
     """wrapper for print"""
     return x.reshape(x.shape[0])
 
+
 def test_tensorflow(step=1, epochs=1000):
     inputs = np.array([[0.52, 1.12, 0.77],
                        [0.88, -1.08, 0.15],
@@ -36,18 +37,18 @@ def test_tensorflow(step=1, epochs=1000):
 
     print("tensorflow train: ")
 
-    for i in range(1000):
-        _, loss, dot1, preds, labels_pro, log_pro = sess.run([opt_op, loss, dot1, preds, labels_pro, log_pro])
-        print(wrapper(dot1))
-        print(wrapper(preds))
-        print(wrapper(labels_pro))
-        print(wrapper(log_pro))
-        print(loss)
-        break
-        # if i % step == 0:
-        #     print("iteration: {}, loss: {}, weights: {}".format(i, outs[1], outs[2].reshape((outs[2].shape[0]))))
+    for i in range(epochs):
+        # _, loss, dot1, preds, labels_pro, log_pro = sess.run([opt_op, loss, dot1, preds, labels_pro, log_pro])
+        # print(wrapper(dot1))
+        # print(wrapper(preds))
+        # print(wrapper(labels_pro))
+        # print(wrapper(log_pro))
+        # print(loss)
+        outs = sess.run([opt_op, loss, weights, preds, labels_pro])
+        if i % step == 0:
+            print("iteration: {}, loss: {}, weights: {}, preds: {}, labels_pro: {}".format(i, outs[1], wrapper(outs[2]), wrapper(outs[3]), wrapper(outs[4])))
 
 
 if __name__ == '__main__':
-    test_adam()
-    test_tensorflow()
+    test_adam(epochs=5)
+    test_tensorflow(epochs=5)

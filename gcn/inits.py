@@ -6,11 +6,13 @@ import scipy.sparse as sp
 
 # 1. init
 
+
 def init_dropout(shape, dropout):
     """Dropout 2014, * input"""
     col = np.array([1] * shape[0]).reshape(-1, 1)
     mat = np.repeat(col, shape[1], axis=1)
     return np.random.binomial(mat, dropout)
+
 
 def init_Weight(shape):
     """Glorot & Bengio (AISTATS 2010) init"""
@@ -19,6 +21,8 @@ def init_Weight(shape):
     return initial
 
 # 2. prepare
+
+
 def sparse_to_tuple(sparse_mx):
     """Convert sparse matrix to tuple representation."""
     def to_tuple(mx):

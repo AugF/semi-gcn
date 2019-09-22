@@ -10,14 +10,10 @@ class Layer(object):
         self.adam = None
         self.sparse_inputs = False
 
-    def _call(self, inputs):
+    def call(self, inputs):
         """return output? no layers"""
         # tensorflow just use numerical ways, so grad only needs _call. don't need backward.
-        return inputs
-
-    def __call__(self, inputs):
-        outputs = self._call(inputs)
-        return outputs
+        return NotImplementedError
 
     def back(self, grad_pre_layer):
         return NotImplementedError

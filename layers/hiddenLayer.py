@@ -19,9 +19,9 @@ def forward_hidden(X, A, W):
 
 def backward_hidden(A, W, dH, A_tilde, A_hat):
     dact = backward_act(A_tilde)
-    dW = np.dot(A_hat.T, dH * dact)
+    dW = np.dot(A_hat.T, np.multiply(dH, dact))
 
-    dAhat = np.dot(dH * dact, W.T)
+    dAhat = np.dot(np.multiply(dH, dact), W.T)
     dX = np.dot(A.T, dAhat)
     return dW, dX
 

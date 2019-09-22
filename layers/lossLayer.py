@@ -3,10 +3,12 @@ from layers.softmax_regularize import reg_loss, argsoftmax, backward_regloss, ba
 from gcn.utils import onehot, sample_mask
 import numpy as np
 
+
 def forward_loss(X, Y, A, train_mask):
     loss = _loss(softmax(X), Y, train_mask)
     loss_reg = reg_loss(argsoftmax(X, beta=10), A)
     return loss + loss_reg
+
 
 def backward_grad(X, Y, A, train_mask):
     # loss
@@ -17,10 +19,11 @@ def backward_grad(X, Y, A, train_mask):
     grad_reg = backward_regloss(fx, A)
     grad_softargmax = backward_argsoftmax(X, 10)
 
-    grad_2 = grad_softargmax * grad_reg.reshape(-1, 1)
+    grad_2 = np.multiply(grad_softargmax, grad_reg.reshape(-1, 1))
 
     grad = grad_1 + grad_2
     return grad
+
 
 def check_loss():
     n, c = 4, 3
@@ -55,6 +58,7 @@ def check_loss():
             X[i, j] += h
 
     print("check_grad", check_grad)
+
 
 if __name__ == '__main__':
     check_loss()
