@@ -7,15 +7,15 @@ def forward_cross_entrocpy_loss(outputs, y_onehot, train_mask):
     """y_onehot: one_hot. train_mask: []"""
     softmax_x = softmax(outputs)
     cross_sum = -np.multiply(y_onehot, np.log(softmax_x))
-    cross_real = np.multiply(cross_sum, train_mask.reshape(-1, 1))
+    cross_sum = np.sum(cross_sum, axis=1)
+    cross_real = np.multiply(cross_sum, train_mask)
     return np.mean(cross_real)
 
 def backward_cross_entrocpy_loss(outputs, y_onehot, train_mask):
     """require shape: outputs.shape"""
-    m, n = outputs.shape
     dX = softmax(outputs) - y_onehot
     dX = np.multiply(dX, train_mask.reshape(-1, 1))
-    return dX * (1 / (m*n))
+    return dX / outputs[0]
 
 # hidden
 def act(X):

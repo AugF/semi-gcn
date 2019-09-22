@@ -52,7 +52,8 @@ def test_soft_cross_entropy():
 
     softmax_x = softmax(outputs)
     cross_sum = -np.multiply(y_onehot, np.log(softmax_x))
-    np_loss = np.sum(cross_sum) / len(y)
+    cross_sum = np.sum(cross_sum, axis=1)
+    np_loss = np.mean(cross_sum)
 
     tf_outputs = tf.constant(outputs)
     tf_y_onehot = tf.constant(y_onehot)
