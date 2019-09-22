@@ -79,21 +79,6 @@ def test_gcn():
 
     grad_weight_hidden += 0.5 * weights_hidden
 
-    # check grad
-    loss_weight_hidden_f = lambda x: forward_cross_entrocpy_loss(
-        forward_hidden(adj, forward_hidden(adj, inputs, x), weights_outputs), y_onehot, train_mask) + 0.5 * l2_loss(x)
-
-    loss_weight_outputs_f = lambda x: forward_cross_entrocpy_loss(
-        forward_hidden(adj, forward_hidden(adj, inputs, weights_hidden), x), y_onehot, train_mask) + 0.5 * l2_loss(weights_hidden)
-
-    check_grad_weight_outputs = numerical_grad(loss_weight_outputs_f, weights_outputs)
-    check_grad_weight_hidden = numerical_grad(loss_weight_hidden_f, weights_hidden)
-
-    print("grad weight outputs", grad_weight_outputs)
-    print("check grad weight outputs", check_grad_weight_outputs)
-
-    print("grad weight hidden", grad_weight_hidden)
-    print("check grad weight hidden", check_grad_weight_hidden)
 
 
 if __name__ == '__main__':
