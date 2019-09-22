@@ -2,6 +2,7 @@
 import autograd.numpy as grad_np  # autograd must use numpy
 from autograd import grad
 import numpy as np
+from tensor.adam_tf import test_tensorflow
 
 def wrapper(x):
     """wrapper for print"""
@@ -98,26 +99,35 @@ def test_sgd(epochs=1000, training_loss=LogisticModel().training_loss):
 
 
 def test_adam(step=1, epochs=1000):
-    # lgmodel
-    lgmodel = LogisticModel()
-    inputs, targets, training_loss = lgmodel.inputs, lgmodel.targets, lgmodel.training_loss
+    inputs = np.array([[0.52, 1.12, 0.77],
+                       [0.88, -1.08, 0.15],
+                       [0.52, 0.06, -1.30],
+                       [0.74, -2.49, 1.39]])
+    targets = np.array([1., 1., 0., 1.]).reshape(-1, 1)
+
     weights = np.array([0., 0., 0.]).reshape(-1, 1)
-    # adam
-    # g_t = np.dot(inputs.T, np.array([1]*inputs.shape[0]).reshape(-1, 1))
-    # print("g_t", wrapper(g_t))
-    g_t = lgmodel.numerical_loss(lambda x: np.sum(np.dot(inputs, x)), np.random.random((3, 1)))
-    # print("check grad", wrapper(check_grad))
 
     print("adam train")
     adam = Adam(weights=weights, learning_rate=0.01)
     for i in range(epochs):
         weights = adam.theta_t.copy()
+        np_dot = np.dot(inputs, weights)
+        np_sigmoid = 1 / (1 + np.exp(-np_dot))  # y = 1 / (1 + exp(-x))
+        np_labels = np_sigmoid * targets + (1 - np_sigmoid) * (1 - targets)
+        np_log = np.log(np_labels)
+        np_loss = - np.sum(np_log)
+
+        dloss = np.where(np.zeros(np_log.shape) == 0, -1, -1)
+        dlog = 1 / np_labels
+        dlabels = 2 * targets - 1
+        dsigmoid = np_sigmoid - np_sigmoid ** 2  # todo 符号不对！ why?
+        ddot = inputs.T  # dot
+        g_t = np.dot(ddot, dsigmoid * dlabels * dlog * dloss)
+
         adam.minimize(g_t)
-        dot1 = np.dot(inputs, weights)
-        loss = np.sum(dot1)
-        if i % step == 0:
-            print("iteration: {}, loss: {}, weights: {}".format(i, loss, wrapper(adam.theta_t)))
+
+        print("iteration: {}, loss: {}, weights: {}".format(i, np_loss, weights))
 
 
 if __name__ == '__main__':
-    test_adam(20)
+    test_adam(epochs=5)
