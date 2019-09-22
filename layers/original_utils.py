@@ -1,44 +1,10 @@
 import numpy as np
 
-
-def prepare_gcn():
-    # adj, features, labels, train_mask
-    n, f, c = 10, 4, 3
-
-    np.random.seed(1)
-    adj = np.random.random((n, n))
-    features = np.random.random((n, f))
-
-    y = np.random.randint(0, c, (n, ))
-    labels = onehot(y, c)
-
-    # prepare train_mask
-    train_mask = sample_mask(range(2), n)
-    val_mask = sample_mask(range(2, 5), n)
-    test_mask = sample_mask(range(8, 10), n)
-
-    y_train = np.zeros(labels.shape)
-    y_val = np.zeros(labels.shape)
-    y_test = np.zeros(labels.shape)
-
-    y_train[train_mask, :] = labels[train_mask, :]
-    y_val[val_mask, :] = labels[val_mask, :]
-    y_test[test_mask, :] = labels[test_mask, :]
-    return adj, features, y_train, y_val, y_test, train_mask, val_mask, test_mask
-
-
 def onehot(y, c):
     res = np.zeros((len(y), c))
     for i, j in enumerate(y):
         res[i, j] = 1
     return res
-
-
-def sample_mask(idx, l):
-    # idx: sample_list;   l: total length
-    mask = np.zeros(l)
-    mask[idx] = 1
-    return np.array(mask, dtype=np.bool)
 
 
 def l2_loss(X):

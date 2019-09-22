@@ -1,6 +1,7 @@
 import numpy as np
-from layers.original_utils import onehot, sample_mask, softmax, numerical_grad, l2_loss
-from layers.original_inits import init_Weight, init_dropout, Adam
+from layers.original_utils import onehot, softmax, numerical_grad, l2_loss
+from layers.original_inits import init_Weight, init_dropout, Adam, masked_accuracy
+from layers.original_load import load_data, sample_mask
 
 # cross-entrocpy loss
 def forward_cross_entrocpy_loss(outputs, y_onehot, train_mask):
@@ -15,7 +16,7 @@ def backward_cross_entrocpy_loss(outputs, y_onehot, train_mask):
     """require shape: outputs.shape"""
     dX = softmax(outputs) - y_onehot
     dX = np.multiply(dX, train_mask.reshape(-1, 1))
-    return dX / outputs[0]
+    return dX / outputs.shape[0]
 
 # hidden
 def act(X):
@@ -83,6 +84,7 @@ def test_gcn():
         hidden = forward_hidden(adj, inputs, weights_hidden)
         outputs = forward_hidden(adj, hidden, weights_outputs)
         loss = forward_cross_entrocpy_loss(outputs, y_onehot, train_mask)
+        acc = masked_accuracy(outputs, y_onehot, train_mask)
 
         grad_loss = backward_cross_entrocpy_loss(outputs, y_onehot, train_mask)
         grad_hidden, grad_weight_outputs = backward_hidden(adj, hidden, weights_outputs, grad_loss)
@@ -93,7 +95,7 @@ def test_gcn():
         adam_weight_hidden.minimize(grad_weight_hidden)
         adam_weight_outputs.minimize(grad_weight_outputs)
 
-        print("iteration: {}, loss: {}".format(i, loss))
+        print("iteration: {}, loss: {}, acc: {}".format(i, loss, acc))
         # print("weight_hidden", adam_weight_hidden.theta_t)
         # print("weight_ouputs", adam_weight_outputs.theta_t)
 
