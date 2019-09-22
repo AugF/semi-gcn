@@ -77,7 +77,7 @@ def test_adam(step=1, epochs=1000):
     print("adam train")
     adam = Adam(weights=weights, learning_rate=0.01)
     for i in range(epochs):
-        weights = adam.theta_t.copy()
+        weights = adam.theta_t
         np_dot = np.dot(inputs, weights)
         np_sigmoid = 1 / (1 + np.exp(-np_dot))  # y = 1 / (1 + exp(-x))
         np_labels = np_sigmoid * targets + (1 - np_sigmoid) * (1 - targets)

@@ -1,6 +1,6 @@
 import numpy as np
 from layers.original_utils import onehot, sample_mask, softmax, numerical_grad, l2_loss
-from layers.original_inits import init_Weight, init_dropout
+from layers.original_inits import init_Weight, init_dropout, Adam
 
 # cross-entrocpy loss
 def forward_cross_entrocpy_loss(outputs, y_onehot, train_mask):
@@ -9,7 +9,6 @@ def forward_cross_entrocpy_loss(outputs, y_onehot, train_mask):
     cross_sum = -np.multiply(y_onehot, np.log(softmax_x))
     cross_real = np.multiply(cross_sum, train_mask.reshape(-1, 1))
     return np.mean(cross_real)
-
 
 def backward_cross_entrocpy_loss(outputs, y_onehot, train_mask):
     """require shape: outputs.shape"""
@@ -69,16 +68,34 @@ def test_gcn():
     y_onehot = onehot(y_true, c)
     train_mask = sample_mask(range(l), n)
 
-    # backwards
-    hidden = forward_hidden(adj, inputs, weights_hidden)
-    outputs = forward_hidden(adj, hidden, weights_outputs)
 
-    grad_loss = backward_cross_entrocpy_loss(outputs, y_onehot, train_mask)
-    grad_hidden, grad_weight_outputs = backward_hidden(adj, hidden, weights_outputs, grad_loss)
-    _, grad_weight_hidden = backward_hidden(adj, inputs, weights_hidden, grad_hidden)
+    # add adam train
 
-    grad_weight_hidden += 0.5 * weights_hidden
+    # init weights adam
+    adam_weight_hidden = Adam(weights=weights_hidden, learning_rate=0.01)
+    adam_weight_outputs = Adam(weights=weights_outputs, learning_rate=0.01)
 
+    # train
+    for i in range(20):
+        weights_hidden = adam_weight_hidden.theta_t
+        weights_outputs = adam_weight_outputs.theta_t
+
+        hidden = forward_hidden(adj, inputs, weights_hidden)
+        outputs = forward_hidden(adj, hidden, weights_outputs)
+        loss = forward_cross_entrocpy_loss(outputs, y_onehot, train_mask)
+
+        grad_loss = backward_cross_entrocpy_loss(outputs, y_onehot, train_mask)
+        grad_hidden, grad_weight_outputs = backward_hidden(adj, hidden, weights_outputs, grad_loss)
+
+        _, grad_weight_hidden = backward_hidden(adj, inputs, weights_hidden, grad_hidden)
+        grad_weight_hidden += 0.5 * weights_hidden
+
+        adam_weight_hidden.minimize(grad_weight_hidden)
+        adam_weight_outputs.minimize(grad_weight_outputs)
+
+        print("iteration: {}, loss: {}".format(i, loss))
+        # print("weight_hidden", adam_weight_hidden.theta_t)
+        # print("weight_ouputs", adam_weight_outputs.theta_t)
 
 
 if __name__ == '__main__':
