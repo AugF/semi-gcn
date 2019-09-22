@@ -1,5 +1,6 @@
 import numpy as np
-from layers.original_utils import onehot, sample_mask, softmax, numerical_grad
+from layers.original_utils import onehot, sample_mask, softmax, numerical_grad, l2_loss
+from layers.original_inits import init_Weight, init_dropout
 
 # cross-entrocpy loss
 def forward_cross_entrocpy_loss(outputs, y_onehot, train_mask):
@@ -7,14 +8,15 @@ def forward_cross_entrocpy_loss(outputs, y_onehot, train_mask):
     softmax_x = softmax(outputs)
     cross_sum = -np.multiply(y_onehot, np.log(softmax_x))
     cross_real = np.multiply(cross_sum, train_mask.reshape(-1, 1))
-    return np.sum(cross_real)
+    return np.mean(cross_real)
 
 
 def backward_cross_entrocpy_loss(outputs, y_onehot, train_mask):
     """require shape: outputs.shape"""
+    m, n = outputs.shape
     dX = softmax(outputs) - y_onehot
     dX = np.multiply(dX, train_mask.reshape(-1, 1))
-    return dX
+    return dX * (1 / (m*n))
 
 # hidden
 def act(X):
@@ -24,9 +26,16 @@ def backward_act(X):
     return np.where(X <= 0, 0, 1)
 
 
-def forward_hidden(adj, hidden, weight_hidden):
+def forward_hidden(adj, hidden, weight_hidden, drop_out=0.5, drop_flag=False, bias_flag=False):
+    # todo drop out;
+    # if drop_flag:
+    #     hidden *= init_dropout(hidden.shape, drop_out)
     A_hat = np.dot(adj, hidden)
     A_tilde = np.dot(A_hat, weight_hidden)
+    # todo add bias ? have to update
+    # if bias_flag:
+    #     A_tilde += np.zeros(A_tilde.shape)
+
     H = act(A_tilde)
     return H
 
@@ -43,35 +52,6 @@ def backward_hidden(adj, hidden, weight_hidden, pre_layer_grad):
     return dX, dW
 
 
-def test_hidden():
-    n, f, c, l = 4, 2, 3, 2
-    # hidden inits
-    adj = np.random.random((n, n))
-    hidden = np.random.random((n, f))
-    weights_hidden = np.random.random((f, c))
-
-    # loss inits
-    y_true = np.random.randint(0, c, (n,))
-    y_onehot = onehot(y_true, c)
-    train_mask = sample_mask(range(l), n)
-
-    # backward
-    outputs = forward_hidden(adj, hidden, weights_hidden)
-    pre_layer_grad = backward_cross_entrocpy_loss(outputs, y_onehot, train_mask)
-    grad_hidden, grad_weight = backward_hidden(adj, hidden, weights_hidden, pre_layer_grad)
-
-    loss_weight_f = lambda x: forward_cross_entrocpy_loss(forward_hidden(adj, hidden, x), y_onehot, train_mask)
-    loss_hidden_f = lambda x: forward_cross_entrocpy_loss(forward_hidden(adj, x, weights_hidden), y_onehot, train_mask)
-
-    check_grad_weight = numerical_grad(loss_weight_f, weights_hidden)
-    check_grad_hidden = numerical_grad(loss_hidden_f, hidden)
-
-    print("grad_weight", grad_weight)
-    print("check_grad_weight", check_grad_weight)
-
-    print("grad hidden", grad_hidden)
-    print("check_grad_hidden", check_grad_hidden)
-
 def test_gcn():
     n, f, h, c, l = 4, 2, 3, 3, 2
     # inputs inits
@@ -79,10 +59,10 @@ def test_gcn():
     adj = np.random.random((n, n))
 
     # hidden_x inits
-    weights_hidden = np.random.random((f, h))
+    weights_hidden = init_Weight((f, h))
 
     # hidden inits
-    weights_outputs = np.random.random((h, c))
+    weights_outputs = init_Weight((h, c))
 
     # loss inits
     y_true = np.random.randint(0, c, (n,))
@@ -97,12 +77,14 @@ def test_gcn():
     grad_hidden, grad_weight_outputs = backward_hidden(adj, hidden, weights_outputs, grad_loss)
     _, grad_weight_hidden = backward_hidden(adj, inputs, weights_hidden, grad_hidden)
 
+    grad_weight_hidden += 0.5 * weights_hidden
+
     # check grad
-    loss_weight_hidden_f = lambda x : forward_cross_entrocpy_loss(
-        forward_hidden(adj, forward_hidden(adj, inputs, x), weights_outputs), y_onehot, train_mask)
+    loss_weight_hidden_f = lambda x: forward_cross_entrocpy_loss(
+        forward_hidden(adj, forward_hidden(adj, inputs, x), weights_outputs), y_onehot, train_mask) + 0.5 * l2_loss(x)
 
     loss_weight_outputs_f = lambda x: forward_cross_entrocpy_loss(
-        forward_hidden(adj, forward_hidden(adj, inputs, weights_hidden), x), y_onehot, train_mask)
+        forward_hidden(adj, forward_hidden(adj, inputs, weights_hidden), x), y_onehot, train_mask) + 0.5 * l2_loss(weights_hidden)
 
     check_grad_weight_outputs = numerical_grad(loss_weight_outputs_f, weights_outputs)
     check_grad_weight_hidden = numerical_grad(loss_weight_hidden_f, weights_hidden)
@@ -112,25 +94,6 @@ def test_gcn():
 
     print("grad weight hidden", grad_weight_hidden)
     print("check grad weight hidden", check_grad_weight_hidden)
-
-
-def test_cross_entrocpy_loss():
-    n, c = 4, 3
-    outputs = np.random.random((n, c))
-    y_true = np.random.randint(0, c, (n,))
-    y_onehot = onehot(y_true, c)
-
-    l = 2
-    train_mask = sample_mask(range(l), n)
-
-    # grad
-    grad = backward_cross_entrocpy_loss(outputs, y_onehot, train_mask)
-
-    # check-grad
-    g = lambda x: forward_cross_entrocpy_loss(x, y_onehot, train_mask)  # forward
-    check_grad = numerical_grad(g, outputs)
-    print("grad", grad)
-    print("check_grad", check_grad)
 
 
 if __name__ == '__main__':

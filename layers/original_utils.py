@@ -49,7 +49,7 @@ def l2_loss(X):
     return x_l2
 
 def softmax(X):
-    """softmax """
+    """softmax x"""
     exp_x = np.exp(X)
     sum_x = np.sum(exp_x, axis=1).reshape(-1, 1)
     softmax_x = exp_x / sum_x
