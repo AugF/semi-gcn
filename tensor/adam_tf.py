@@ -1,6 +1,6 @@
 import tensorflow as tf
 import numpy as np
-from tensor.adam_ex1 import test_adam
+from tensor.adam_local import test_adam
 
 
 def wrapper(x):

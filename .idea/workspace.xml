@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3f3a8e00-f8ab-4d27-99d9-71e9e35a06df" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/tensor/adam_ex1.py" beforeDir="false" afterPath="$PROJECT_DIR$/tensor/adam_ex1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tensor/adam_tf.py" beforeDir="false" afterPath="$PROJECT_DIR$/tensor/adam_tf.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/layers/largeDataTest.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tensor/sigmoidCheckGrad.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layers/gcnModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/layers/miniDataTest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tensor/demo.py" beforeDir="false" afterPath="$PROJECT_DIR$/tensor/demoTf.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tensor/ex1.py" beforeDir="false" afterPath="$PROJECT_DIR$/tensor/logical_modelNpVsTf.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,64 +34,62 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.65348524">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/tensor/adam_ex1.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="70">
-                  <caret line="107" column="7" selection-start-line="107" selection-start-column="7" selection-end-line="107" selection-end-column="7" />
-                  <folding>
-                    <element signature="e#21#80#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/tensor/adam_tf.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="90">
-                  <caret line="48" column="22" lean-forward="true" selection-start-line="48" selection-start-column="22" selection-end-line="48" selection-end-column="22" />
-                  <folding>
-                    <element signature="e#0#23#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/tensor/demo.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="396">
-                  <caret line="22" column="28" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
-                  <folding>
-                    <element signature="e#0#23#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/tensor/ex1.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-46">
-                  <caret line="9" selection-start-line="9" selection-end-line="9" />
-                  <folding>
-                    <element signature="e#0#23#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tensor/adam_ex1.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="404">
+              <caret line="115" column="38" lean-forward="true" selection-start-line="115" selection-start-column="38" selection-end-line="115" selection-end-column="38" />
+              <folding>
+                <element signature="e#21#80#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/layers/miniDataTest.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="62" lean-forward="true" selection-end-line="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/layers/largeDataTest.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="72">
+              <caret line="4" column="62" selection-start-line="4" selection-start-column="62" selection-end-line="4" selection-end-column="62" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tensor/logical_modelNpVsTf.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="126">
+              <caret line="47" selection-start-line="47" selection-end-line="47" />
+              <folding>
+                <element signature="e#0#23#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tensor/adam_tf.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="512">
+              <caret line="45" selection-start-line="45" selection-end-line="45" />
+              <folding>
+                <element signature="e#0#23#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -127,11 +129,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$APPLICATION_HOME_DIR$/helpers/pydev/pydevconsole.py" />
-        <option value="$PROJECT_DIR$/v2.py" />
-        <option value="$PROJECT_DIR$/adam.py" />
-        <option value="$PROJECT_DIR$/ex.py" />
-        <option value="$PROJECT_DIR$/precoss.py" />
         <option value="$PROJECT_DIR$/v1.py" />
         <option value="$PROJECT_DIR$/model.py" />
         <option value="$PROJECT_DIR$/tensor/figure.py" />
@@ -169,15 +166,20 @@
         <option value="$PROJECT_DIR$/layers/lossLayer.py" />
         <option value="$PROJECT_DIR$/layers/hiddenLayer.py" />
         <option value="$PROJECT_DIR$/layers/softmax_regularize.py" />
-        <option value="$PROJECT_DIR$/layers/gcnModel.py" />
         <option value="$PROJECT_DIR$/tensor/ex.py" />
         <option value="$PROJECT_DIR$/gcn/inits.py" />
         <option value="$PROJECT_DIR$/gcn/utils.py" />
         <option value="$PROJECT_DIR$/gcn/train.py" />
         <option value="$PROJECT_DIR$/gcn/model.py" />
         <option value="$PROJECT_DIR$/tensor/ex1.py" />
-        <option value="$PROJECT_DIR$/tensor/adam_tf.py" />
         <option value="$PROJECT_DIR$/tensor/adam_ex1.py" />
+        <option value="$PROJECT_DIR$/layers/gcnModel.py" />
+        <option value="$PROJECT_DIR$/layers/originalModel.py" />
+        <option value="$PROJECT_DIR$/layers/miniDataTest.py" />
+        <option value="$PROJECT_DIR$/layers/largeDataTest.py" />
+        <option value="$PROJECT_DIR$/tensor/adam_tf.py" />
+        <option value="$PROJECT_DIR$/tensor/sigmoidCheckGrad.py" />
+        <option value="$PROJECT_DIR$/tensor/logical_modelNpVsTf.py" />
       </list>
     </option>
   </component>
@@ -251,7 +253,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.adam_tf">
+  <component name="RunManager" selected="Python.logical_modelNpVsTf">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="semi-gnn" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -325,7 +327,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tensor/ex1.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\hikk\PycharmProjects\semi-gnn\tensor\logical_modelNpVsTf.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -344,7 +346,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/layers/gcnModel.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\hikk\PycharmProjects\semi-gnn\layers\miniDataTest.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -353,20 +355,17 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="train" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="logical_modelNpVsTf" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="semi-gnn" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/gcn" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tensor" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/gcn/train.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tensor/logical_modelNpVsTf.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -377,11 +376,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.logical_modelNpVsTf" />
         <item itemvalue="Python.adam_tf" />
         <item itemvalue="Python.ex1" />
         <item itemvalue="Python.gcnModel" />
         <item itemvalue="Python.ex" />
-        <item itemvalue="Python.train" />
       </list>
     </recent_temporary>
   </component>
@@ -425,12 +424,12 @@
       <workItem from="1568977160002" duration="599000" />
       <workItem from="1569020666141" duration="9530000" />
       <workItem from="1569049192285" duration="2790000" />
-      <workItem from="1569113919238" duration="6462000" />
+      <workItem from="1569113919238" duration="11575000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="201307000" />
+    <option name="totallyTimeSpent" value="206420000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -444,7 +443,7 @@
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4961665" weight="0.09651475" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4961665" visible="true" weight="0.123324394" />
       <window_info id="Structure" order="1" sideWeight="0.50383353" side_tool="true" weight="0.15028432" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -459,7 +458,7 @@
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.30736545" />
-      <window_info active="true" anchor="bottom" id="Python Console" order="12" visible="true" weight="0.62889516" />
+      <window_info active="true" anchor="bottom" id="Python Console" order="12" visible="true" weight="0.5283286" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -536,8 +535,6 @@
     </option>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/adam.py" />
-    <entry file="file://$PROJECT_DIR$/cs231n/NearsetNeighbor.py" />
     <entry file="file://$PROJECT_DIR$/cs231n/ex5.py" />
     <entry file="file://$PROJECT_DIR$/cs231n/ex3.py" />
     <entry file="file://$PROJECT_DIR$/gcn/util.py" />
@@ -746,13 +743,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tensor/ex.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gcn/adam.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="414">
@@ -774,16 +764,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="229">
           <caret line="52" selection-start-line="52" selection-end-line="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/layers/gcnModel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="86" column="18" lean-forward="true" selection-start-line="86" selection-start-column="18" selection-end-line="86" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#62#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -814,7 +794,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tensor/demo.py">
+    <entry file="file://$PROJECT_DIR$/tensor/ex.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tensor/demoTf.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
           <caret line="22" column="28" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
@@ -824,32 +811,49 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tensor/ex1.py">
+    <entry file="file://$PROJECT_DIR$/tensor/adam_ex1.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-46">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
+        <state relative-caret-position="404">
+          <caret line="115" column="38" lean-forward="true" selection-start-line="115" selection-start-column="38" selection-end-line="115" selection-end-column="38" />
           <folding>
-            <element signature="e#0#23#0" expanded="true" />
+            <element signature="e#21#80#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/layers/miniDataTest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="62" lean-forward="true" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/layers/largeDataTest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="62" selection-start-line="4" selection-start-column="62" selection-end-line="4" selection-end-column="62" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tensor/adam_tf.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="48" column="22" lean-forward="true" selection-start-line="48" selection-start-column="22" selection-end-line="48" selection-end-column="22" />
+        <state relative-caret-position="512">
+          <caret line="45" selection-start-line="45" selection-end-line="45" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tensor/adam_ex1.py">
+    <entry file="file://$PROJECT_DIR$/tensor/sigmoidCheckGrad.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tensor/logical_modelNpVsTf.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="70">
-          <caret line="107" column="7" selection-start-line="107" selection-start-column="7" selection-end-line="107" selection-end-column="7" />
+        <state relative-caret-position="126">
+          <caret line="47" selection-start-line="47" selection-end-line="47" />
           <folding>
-            <element signature="e#21#80#0" expanded="true" />
+            <element signature="e#0#23#0" expanded="true" />
           </folding>
         </state>
       </provider>
