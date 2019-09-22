@@ -1,6 +1,6 @@
 import numpy as np
 from layers.original_utils import onehot, softmax, numerical_grad, l2_loss
-from layers.original_inits import init_Weight, init_dropout, Adam, masked_accuracy
+from layers.original_inits import init_Weight, init_dropout, Adam, masked_accuracy, preprocess_features, preprocess_adj
 from layers.original_load import load_data, sample_mask, prepare_gcn
 
 # cross-entrocpy loss
@@ -52,47 +52,83 @@ def backward_hidden(adj, hidden, weight_hidden, pre_layer_grad):
     return dX, dW
 
 
-def test_gcn():
-    # use load_data
-    adj, features, y_train, y_val, y_test, train_mask, val_mask, test_mask = prepare_gcn()
-    n, f, c = adj.shape[0], features.shape[1], y_train.shape[1]
-    h = 4
+class GCN:
+    """GCN"""
+    def __init__(self, load_data_function, hidden_unit=4, learning_rate=0.01):
+        adj, features, y_train, y_val, y_test, train_mask, val_mask, test_mask = load_data_function()
+        self.adj, self.features = preprocess_adj(adj), preprocess_features(features)
+        self.y_train, self.train_mask = y_train, train_mask
+        self.y_val, self.val_mask = y_val, val_mask
+        self.y_test, self.test_mask = y_test, test_mask
+        # init
+        self.n, self.f, self.c = adj.shape[0], features.shape[1], y_train.shape[1]
+        self.h = hidden_unit
+        # init weight
+        self.weight_hidden = init_Weight((self.f, self.h))
+        self.weight_outputs = init_Weight((self.h, self.c))
 
-    features = features
-    y_train = y_train
+        self.adam_weight_hidden = Adam(weights=self.weight_hidden, learning_rate=learning_rate)
+        self.adam_weight_outputs = Adam(weights=self.weight_outputs, learning_rate=learning_rate)
 
-    # init weight
-    weights_hidden = init_Weight((f, h))
-    weights_outputs = init_Weight((h, c))
+        self.hidden = np.zeros((self.n, self.h))
+        self.outputs = np.zeros((self.n, self.c))
 
-    # add adam train
-
-    # init weights adam
-    adam_weight_hidden = Adam(weights=weights_hidden, learning_rate=0.01)
-    adam_weight_outputs = Adam(weights=weights_outputs, learning_rate=0.01)
-
-    # train
-    for i in range(20):
-        weights_hidden = adam_weight_hidden.theta_t
-        weights_outputs = adam_weight_outputs.theta_t
-
-        hidden = forward_hidden(adj, features, weights_hidden)
-        outputs = forward_hidden(adj, hidden, weights_outputs)
+    def evaluate(self):
+        y_train, train_mask = self.y_val, self.val_mask
+        hidden = forward_hidden(self.adj, self.features, self.weight_hidden)
+        outputs = forward_hidden(self.adj, hidden, self.weight_outputs)
         loss = forward_cross_entrocpy_loss(outputs, y_train, train_mask)
         acc = masked_accuracy(outputs, y_train, train_mask)
+        return loss, acc
 
-        grad_loss = backward_cross_entrocpy_loss(outputs, y_train, train_mask)
-        grad_hidden, grad_weight_outputs = backward_hidden(adj, hidden, weights_outputs, grad_loss)
+    def test(self):
+        y_train, train_mask = self.y_test, self.test_mask
+        hidden = forward_hidden(self.adj, self.features, self.weight_hidden)
+        outputs = forward_hidden(self.adj, hidden, self.weight_outputs)
+        loss = forward_cross_entrocpy_loss(outputs, y_train, train_mask)
+        acc = masked_accuracy(outputs, y_train, train_mask)
+        return loss, acc
 
-        _, grad_weight_hidden = backward_hidden(adj, features, weights_hidden, grad_hidden)
-        grad_weight_hidden += 0.5 * weights_hidden
+    def one_train(self):
+        y_train, train_mask = self.y_train, self.train_mask
+        self.hidden = forward_hidden(self.adj, self.features, self.weight_hidden)
+        self.outputs = forward_hidden(self.adj, self.hidden, self.weight_outputs)
+        loss = forward_cross_entrocpy_loss(self.outputs, y_train, train_mask)
+        acc = masked_accuracy(self.outputs, y_train, train_mask)
+        return loss, acc
 
-        adam_weight_hidden.minimize(grad_weight_hidden)
-        adam_weight_outputs.minimize(grad_weight_outputs)
+    def one_update(self):
+        y_train, train_mask = self.y_train, self.train_mask
+        grad_loss = backward_cross_entrocpy_loss(self.outputs, y_train, train_mask)
+        grad_hidden, grad_weight_outputs = backward_hidden(self.adj, self.hidden, self.weight_outputs, grad_loss)
 
-        print("iteration: {}, loss: {}, acc: {}".format(i, loss, acc))
-        # print("weight_hidden", adam_weight_hidden.theta_t)
-        # print("weight_ouputs", adam_weight_outputs.theta_t)
+        _, grad_weight_hidden = backward_hidden(self.adj, self.features, self.weight_hidden, grad_hidden)
+        grad_weight_hidden += 0.5 * self.weight_hidden
+
+        self.adam_weight_hidden.minimize(grad_weight_hidden)
+        self.adam_weight_outputs.minimize(grad_weight_outputs)
+
+        self.weight_hidden = self.adam_weight_hidden.theta_t
+        self.weight_outputs = self.adam_weight_outputs.theta_t
+
+
+
+
+def test_gcn():
+    model = GCN(load_data_function=load_data)
+
+    # train
+    for i in range(200):
+        # train step
+        train_loss, train_acc = model.one_train()
+        model.one_update()
+
+        # val step
+        val_loss, val_acc = model.evaluate()
+        print("iteration: {}, train_loss: {}, train_acc: {}, val_loss: {}, val_acc: {}".
+              format(i, train_loss, train_acc, val_loss, val_acc))
+
+        # todo early stop
 
 
 if __name__ == '__main__':

@@ -32,7 +32,7 @@ def prepare_gcn():
     return adj, features, y_train, y_val, y_test, train_mask, val_mask, test_mask
 
 
-def load_data(dataset_str):
+def load_data(dataset_str="cora"):
     names = ['x', 'y', 'tx', 'ty', 'allx', 'ally', 'graph']
     objects = []
     for i in range(len(names)):

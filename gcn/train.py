@@ -35,9 +35,9 @@ adj, features, y_train, y_val, y_test, train_mask, val_mask, test_mask = prepare
 # delta = preprocess_Delta(adj)
 
 # a. get symmetrically normalize adj matrix  (position_list, value_list, shape)
-# adj = preprocess_adj(adj)   # every layer is the same
+adj = preprocess_adj(adj)   # every layer is the same
 # b. row normalize features,  same to adj
-# features = preprocess_features(features)
+features = preprocess_features(features)
 
 # warp to placeholders
 placeholders = {
