@@ -26,10 +26,10 @@ def backward_act(X):
     return np.where(X <= 0, 0, 1)
 
 
-def forward_hidden(adj, hidden, weight_hidden, drop_out=0.5, drop_flag=False, bias_flag=False):
+def forward_hidden(adj, hidden, weight_hidden, drop_out=0.5, drop_flag=True, bias_flag=False):
     # todo drop out;
-    # if drop_flag:
-    #     hidden *= init_dropout(hidden.shape, drop_out)
+    if drop_flag:
+        hidden = np.multiply(hidden, init_dropout(hidden.shape, 1 - drop_out))
     A_hat = np.dot(adj, hidden)
     A_tilde = np.dot(A_hat, weight_hidden)
     # todo add bias ? have to update
@@ -54,7 +54,7 @@ def backward_hidden(adj, hidden, weight_hidden, pre_layer_grad):
 
 class GCN:
     """GCN"""
-    def __init__(self, load_data_function, hidden_unit=4, learning_rate=0.1):
+    def __init__(self, load_data_function, hidden_unit=4, learning_rate=0.01):
         adj, features, y_train, y_val, y_test, train_mask, val_mask, test_mask = load_data_function()
         self.adj, self.features = preprocess_adj(adj), preprocess_features(features)  # preprocess
 
@@ -116,7 +116,7 @@ class GCN:
 
 
 def test_gcn(early_stopping=10):
-    model = GCN(load_data_function=load_data)
+    model = GCN(load_data_function=load_data, hidden_unit=16)
 
     cost_val = []
     # train
@@ -131,7 +131,6 @@ def test_gcn(early_stopping=10):
               format(i, train_loss, train_acc, val_loss, val_acc))
         cost_val.append(val_loss)
 
-        # todo early stop
         if i > early_stopping and cost_val[-1] > np.mean(cost_val[-(early_stopping + 1): -1]):
             print("early stopping ! ")
 
