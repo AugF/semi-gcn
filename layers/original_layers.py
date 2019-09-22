@@ -54,9 +54,10 @@ def backward_hidden(adj, hidden, weight_hidden, pre_layer_grad):
 
 class GCN:
     """GCN"""
-    def __init__(self, load_data_function, hidden_unit=4, learning_rate=0.01):
+    def __init__(self, load_data_function, hidden_unit=4, learning_rate=0.1):
         adj, features, y_train, y_val, y_test, train_mask, val_mask, test_mask = load_data_function()
-        self.adj, self.features = preprocess_adj(adj), preprocess_features(features)
+        self.adj, self.features = preprocess_adj(adj), preprocess_features(features)  # preprocess
+
         self.y_train, self.train_mask = y_train, train_mask
         self.y_val, self.val_mask = y_val, val_mask
         self.y_test, self.test_mask = y_test, test_mask
@@ -114,9 +115,10 @@ class GCN:
 
 
 
-def test_gcn():
+def test_gcn(early_stopping=10):
     model = GCN(load_data_function=load_data)
 
+    cost_val = []
     # train
     for i in range(200):
         # train step
@@ -127,9 +129,11 @@ def test_gcn():
         val_loss, val_acc = model.evaluate()
         print("iteration: {}, train_loss: {}, train_acc: {}, val_loss: {}, val_acc: {}".
               format(i, train_loss, train_acc, val_loss, val_acc))
+        cost_val.append(val_loss)
 
         # todo early stop
-
+        if i > early_stopping and cost_val[-1] > np.mean(cost_val[-(early_stopping + 1): -1]):
+            print("early stopping ! ")
 
 if __name__ == '__main__':
     test_gcn()

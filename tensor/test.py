@@ -92,5 +92,18 @@ def test_accuracy():
     res = masked_accuracy(preds, labels, mask)
     print("res", res)
 
+def test_write_log(log_str="test"):
+    import os
+    print(os.getcwd())
+    log_file_path = "../log/{}.txt".format(log_str)
+    if not os.path.exists(log_file_path):
+        with open(log_file_path, "w") as f:
+            print(f)
+
+    with open(log_file_path, "a") as f:
+        for i in range(10):
+            f.write(str(i) + "\n")
+
 if __name__ == '__main__':
-    test_soft_cross_entropy()
+    test_write_log()
+    test_write_log()

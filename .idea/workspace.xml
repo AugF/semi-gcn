@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3f3a8e00-f8ab-4d27-99d9-71e9e35a06df" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/gcn/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/gcn/train.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layers/original_inits.py" beforeDir="false" afterPath="$PROJECT_DIR$/layers/original_inits.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/layers/original_layers.py" beforeDir="false" afterPath="$PROJECT_DIR$/layers/original_layers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layers/original_load.py" beforeDir="false" afterPath="$PROJECT_DIR$/layers/original_load.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tensor/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/tensor/test.py" afterDir="false" />
     </list>
     <list id="5f6e0f6d-d706-45c7-92ae-e3d0c0758781" name="loss without weight_decay" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,6 +33,32 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tensor/test.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="468">
+              <caret line="104" column="32" selection-start-line="104" selection-start-column="32" selection-end-line="104" selection-end-column="32" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/log/test.txt">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/.PyCharm2018.3/system/python_stubs/-1184660488/builtins.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1396">
+              <caret line="341" column="4" selection-start-line="341" selection-start-column="4" selection-end-line="341" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/layers/original_utils.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="144">
@@ -46,8 +70,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/layers/original_load.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="43" lean-forward="true" selection-start-line="43" selection-end-line="43" />
+            <state relative-caret-position="-587">
+              <caret line="34" column="4" selection-start-line="34" selection-start-column="4" selection-end-line="34" selection-end-column="4" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -94,8 +118,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/layers/original_layers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="235">
-              <caret line="129" lean-forward="true" selection-start-line="129" selection-end-line="129" />
+            <state relative-caret-position="198">
+              <caret line="118" column="40" selection-start-line="118" selection-start-column="40" selection-end-line="118" selection-end-column="40" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -195,18 +219,18 @@
         <option value="$PROJECT_DIR$/layers/miniDataTest.py" />
         <option value="$PROJECT_DIR$/tensor/adam_local.py" />
         <option value="$PROJECT_DIR$/tensor/adam_tf.py" />
-        <option value="$PROJECT_DIR$/tensor/test.py" />
         <option value="$PROJECT_DIR$/layers/original_utils.py" />
         <option value="$PROJECT_DIR$/gcn/train.py" />
         <option value="$PROJECT_DIR$/layers/original_load.py" />
         <option value="$PROJECT_DIR$/layers/original_inits.py" />
         <option value="$PROJECT_DIR$/layers/original_layers.py" />
+        <option value="$PROJECT_DIR$/tensor/test.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="width" value="785" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="52" />
+    <option name="width" value="1585" />
     <option name="height" value="1038" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -225,17 +249,17 @@
             <path>
               <item name="semi-gnn" type="b2602c69:ProjectViewProjectNode" />
               <item name="semi-gnn" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="semi-gnn" type="b2602c69:ProjectViewProjectNode" />
-              <item name="semi-gnn" type="462c0819:PsiDirectoryNode" />
               <item name="gcn" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="semi-gnn" type="b2602c69:ProjectViewProjectNode" />
               <item name="semi-gnn" type="462c0819:PsiDirectoryNode" />
               <item name="layers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="semi-gnn" type="b2602c69:ProjectViewProjectNode" />
+              <item name="semi-gnn" type="462c0819:PsiDirectoryNode" />
+              <item name="log" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="semi-gnn" type="b2602c69:ProjectViewProjectNode" />
@@ -279,7 +303,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.original_layers">
+  <component name="RunManager" selected="Python.test">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="semi-gnn" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -402,8 +426,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.original_layers" />
         <item itemvalue="Python.test" />
+        <item itemvalue="Python.original_layers" />
         <item itemvalue="Python.adam_tf" />
         <item itemvalue="Python.adam_local" />
         <item itemvalue="Python.logical_modelNpVsTf" />
@@ -452,12 +476,12 @@
       <workItem from="1569020666141" duration="9530000" />
       <workItem from="1569049192285" duration="2790000" />
       <workItem from="1569113919238" duration="12779000" />
-      <workItem from="1569139064362" duration="15026000" />
+      <workItem from="1569139064362" duration="16180000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="222650000" />
+    <option name="totallyTimeSpent" value="223804000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -469,9 +493,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="0" width="628" height="830" extended-state="0" />
+    <frame x="500" y="22" width="1268" height="830" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49433428" visible="true" weight="0.3736842" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49433428" visible="true" weight="0.17603306" />
       <window_info id="Structure" order="1" sideWeight="0.5056657" side_tool="true" weight="0.1427614" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -485,8 +509,8 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.40084985" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.30736545" />
-      <window_info active="true" anchor="bottom" id="Python Console" order="12" visible="true" weight="0.44555873" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.6798867" />
+      <window_info anchor="bottom" id="Python Console" order="12" weight="0.70200574" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -563,8 +587,6 @@
     </option>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/test/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/test/fun.py" />
     <entry file="file://C:/Python36/Lib/site-packages/IPython/core/interactiveshell.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="100">
@@ -856,16 +878,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tensor/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="804">
-          <caret line="65" column="13" selection-start-line="65" selection-start-column="13" selection-end-line="65" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/layers/original_utils.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
@@ -919,18 +931,38 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/layers/original_load.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="43" lean-forward="true" selection-start-line="43" selection-end-line="43" />
+        <state relative-caret-position="-587">
+          <caret line="34" column="4" selection-start-line="34" selection-start-column="4" selection-end-line="34" selection-end-column="4" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2018.3/system/python_stubs/-1184660488/builtins.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1396">
+          <caret line="341" column="4" selection-start-line="341" selection-start-column="4" selection-end-line="341" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/log/test.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tensor/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="104" column="32" selection-start-line="104" selection-start-column="32" selection-end-line="104" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/layers/original_layers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="129" lean-forward="true" selection-start-line="129" selection-end-line="129" />
+        <state relative-caret-position="198">
+          <caret line="118" column="40" selection-start-line="118" selection-start-column="40" selection-end-line="118" selection-end-column="40" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
