@@ -2,7 +2,7 @@
 import autograd.numpy as grad_np  # autograd must use numpy
 from autograd import grad
 import numpy as np
-from tensor.adam_tf import test_tensorflow
+from adam.adam_tf import test_tensorflow
 
 def wrapper(x):
     """wrapper for print"""
