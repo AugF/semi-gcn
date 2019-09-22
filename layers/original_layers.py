@@ -1,7 +1,7 @@
 import numpy as np
 from layers.original_utils import onehot, softmax, numerical_grad, l2_loss
 from layers.original_inits import init_Weight, init_dropout, Adam, masked_accuracy
-from layers.original_load import load_data, sample_mask
+from layers.original_load import load_data, sample_mask, prepare_gcn
 
 # cross-entrocpy loss
 def forward_cross_entrocpy_loss(outputs, y_onehot, train_mask):
@@ -53,22 +53,17 @@ def backward_hidden(adj, hidden, weight_hidden, pre_layer_grad):
 
 
 def test_gcn():
-    n, f, h, c, l = 4, 2, 3, 3, 2
-    # inputs inits
-    inputs = np.random.random((n, f))
-    adj = np.random.random((n, n))
+    # use load_data
+    adj, features, y_train, y_val, y_test, train_mask, val_mask, test_mask = prepare_gcn()
+    n, f, c = adj.shape[0], features.shape[1], y_train.shape[1]
+    h = 4
 
-    # hidden_x inits
+    features = features
+    y_train = y_train
+
+    # init weight
     weights_hidden = init_Weight((f, h))
-
-    # hidden inits
     weights_outputs = init_Weight((h, c))
-
-    # loss inits
-    y_true = np.random.randint(0, c, (n,))
-    y_onehot = onehot(y_true, c)
-    train_mask = sample_mask(range(l), n)
-
 
     # add adam train
 
@@ -81,15 +76,15 @@ def test_gcn():
         weights_hidden = adam_weight_hidden.theta_t
         weights_outputs = adam_weight_outputs.theta_t
 
-        hidden = forward_hidden(adj, inputs, weights_hidden)
+        hidden = forward_hidden(adj, features, weights_hidden)
         outputs = forward_hidden(adj, hidden, weights_outputs)
-        loss = forward_cross_entrocpy_loss(outputs, y_onehot, train_mask)
-        acc = masked_accuracy(outputs, y_onehot, train_mask)
+        loss = forward_cross_entrocpy_loss(outputs, y_train, train_mask)
+        acc = masked_accuracy(outputs, y_train, train_mask)
 
-        grad_loss = backward_cross_entrocpy_loss(outputs, y_onehot, train_mask)
+        grad_loss = backward_cross_entrocpy_loss(outputs, y_train, train_mask)
         grad_hidden, grad_weight_outputs = backward_hidden(adj, hidden, weights_outputs, grad_loss)
 
-        _, grad_weight_hidden = backward_hidden(adj, inputs, weights_hidden, grad_hidden)
+        _, grad_weight_hidden = backward_hidden(adj, features, weights_hidden, grad_hidden)
         grad_weight_hidden += 0.5 * weights_hidden
 
         adam_weight_hidden.minimize(grad_weight_hidden)
