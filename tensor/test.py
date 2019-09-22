@@ -1,5 +1,7 @@
 import numpy as np
 import tensorflow as tf
+from layers.original_utils import onehot
+from layers.original_layers import softmax
 
 def test_tf_reduce_mean():
     x = np.random.random((4, 5))
@@ -43,6 +45,26 @@ def test_random_uniform():
     print("np", np_weight_init)
     print("tf", tf_weight_init)
 
+def test_soft_cross_entropy():
+    outputs = np.random.random((4, 3))
+    y = np.array([0, 1, 2, 0])
+    y_onehot = onehot(y, 3)
+
+    softmax_x = softmax(outputs)
+    cross_sum = -np.multiply(y_onehot, np.log(softmax_x))
+    np_loss = np.sum(cross_sum) / len(y)
+
+    tf_outputs = tf.constant(outputs)
+    tf_y_onehot = tf.constant(y_onehot)
+    tf_cross_sum = tf.nn.softmax_cross_entropy_with_logits(logits=tf_outputs, labels=tf_y_onehot)
+    tf_loss = tf.reduce_mean(tf_cross_sum)
+    sess = tf.Session()
+    tf_outs = sess.run([tf_loss, tf_cross_sum])
+    print("np_loss", np_loss)
+    print("tf_loss", tf_outs[0])
+    print("cross_sum", cross_sum)
+    print("tf_cross_sum", tf_outs[1])
+
 def masked_accuracy(preds, labels, mask):
     """Accuracy with masking"""
     correct_predictions = np.equal(np.argmax(preds, axis=1), np.argmax(labels, axis=1))
@@ -70,4 +92,4 @@ def test_accuracy():
     print("res", res)
 
 if __name__ == '__main__':
-    test_accuracy()
+    test_soft_cross_entropy()

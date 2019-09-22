@@ -1,16 +1,28 @@
 import numpy as np
 
+
 def init_Weight(shape):
     """Glorot & Bengio (AISTATS 2010) init"""
     init_range = np.sqrt(6.0 / (shape[0] + shape[1]))
     initial = np.random.uniform(low=-init_range, high=init_range, size=shape)
     return initial
 
+
 def init_dropout(shape, dropout):
     """Dropout 2014, * input"""
     col = np.array([1] * shape[0]).reshape(-1, 1)
     mat = np.repeat(col, shape[1], axis=1)
     return np.random.binomial(mat, dropout)
+
+
+def masked_accuracy(preds, labels, mask):
+    """Accuracy with masking"""
+    correct_predictions = np.equal(np.argmax(preds, axis=1), np.argmax(labels, axis=1))
+    accuracy_all = np.array(correct_predictions, dtype=np.float32)
+    mask = np.array(mask, dtype=np.float32)
+    mask /= np.mean(mask)
+    accuracy_all *= mask
+    return np.mean(accuracy_all)
 
 
 class Adam:
