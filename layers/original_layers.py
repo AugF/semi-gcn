@@ -26,7 +26,7 @@ def backward_act(X):
     return np.where(X <= 0, 0, 1)
 
 
-def forward_hidden(adj, hidden, weight_hidden, drop_out=0.5, drop_flag=True, bias_flag=False):
+def forward_hidden(adj, hidden, weight_hidden, act=lambda x: x, drop_out=0.5, drop_flag=False, bias_flag=False):
     # todo drop out;
     if drop_flag:
         hidden = np.multiply(hidden, init_dropout(hidden.shape, 1 - drop_out))
@@ -40,7 +40,7 @@ def forward_hidden(adj, hidden, weight_hidden, drop_out=0.5, drop_flag=True, bia
     return H
 
 
-def backward_hidden(adj, hidden, weight_hidden, pre_layer_grad):
+def backward_hidden(adj, hidden, weight_hidden, pre_layer_grad, back_act=lambda x: np.ones(x.shape)):  # todo change
     A_hat = np.dot(adj, hidden)
     A_tilde = np.dot(A_hat, weight_hidden)
 
@@ -54,8 +54,8 @@ def backward_hidden(adj, hidden, weight_hidden, pre_layer_grad):
 
 class GCN:
     """GCN"""
-    def __init__(self, load_data_function, hidden_unit=4, learning_rate=0.01):
-        adj, features, y_train, y_val, y_test, train_mask, val_mask, test_mask = load_data_function()
+    def __init__(self, load_data_function, hidden_unit=16, learning_rate=0.01, weight_decay=5e-4):
+        adj, features, y_train, y_val, y_test, train_mask, val_mask, test_mask = load_data_function(0)
         self.adj, self.features = preprocess_adj(adj), preprocess_features(features)  # preprocess
 
         self.y_train, self.train_mask = y_train, train_mask
@@ -114,13 +114,13 @@ class GCN:
 
 
 
-
-def test_gcn(early_stopping=10):
-    model = GCN(load_data_function=load_data, hidden_unit=16)
+def test_gcn(early_stopping=10, ephochs=200, data_str="cora", dropout=0.5, hidden_unit=16, learning_rate=0.01, weight_decay=5e-4):
+    load_data_function = lambda x: load_data(data_str)
+    model = GCN(load_data_function=load_data_function, hidden_unit=hidden_unit, learning_rate=learning_rate, weight_decay=weight_decay)
 
     cost_val = []
     # train
-    for i in range(200):
+    for i in range(ephochs):
         # train step
         train_loss, train_acc = model.one_train()
         model.one_update()
@@ -133,6 +133,9 @@ def test_gcn(early_stopping=10):
 
         if i > early_stopping and cost_val[-1] > np.mean(cost_val[-(early_stopping + 1): -1]):
             print("early stopping ! ")
+
+    test_loss, test_acc = model.test()
+    print("start test, the loss: {}, the acc: {}".format(test_loss, test_acc))
 
 if __name__ == '__main__':
     test_gcn()

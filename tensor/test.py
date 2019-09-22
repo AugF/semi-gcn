@@ -42,8 +42,7 @@ def test_random_uniform():
     sess = tf.Session()
     weight_init = tf.random_uniform(shape, minval=-init_range, maxval=init_range, dtype=tf.float32)
     tf_weight_init = sess.run(weight_init)
-    print("np", np_weight_init)
-    print("tf", tf_weight_init)
+
 
 def test_soft_cross_entropy():
     outputs = np.random.random((4, 3))
@@ -104,6 +103,8 @@ def test_write_log(log_str="test"):
         for i in range(10):
             f.write(str(i) + "\n")
 
+def testfun(x=1):
+    return x
+
 if __name__ == '__main__':
-    test_write_log()
-    test_write_log()
+    f = lambda _: testfun("2")
