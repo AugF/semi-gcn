@@ -9,7 +9,7 @@ def wrapper(x):
 
 class Adam:
     """adam optimizer"""
-    def __init__(self, weights, grad_function, learning_rate=0.001):
+    def __init__(self, weights, learning_rate=0.001):
         """params, init"""
         self.learning_rate = learning_rate
         self.theta_t = weights
@@ -19,12 +19,12 @@ class Adam:
         self.m_t = np.zeros(weights.shape)
         self.v_t = np.zeros(weights.shape)
         self.t = 0
-        self.grad_function = grad_function
+        # self.grad_function = grad_function
 
-    def minimize(self):
+    def minimize(self, g_t):
         """more efficient"""
         self.t += 1
-        g_t = self.grad_function(self.theta_t)
+        # g_t = self.grad_function(self.theta_t)
         alpha_t = self.learning_rate * ((1 - self.beta_2 ** self.t) ** 0.5) / (1 - self.beta_1 ** self.t)
         self.m_t = self.beta_1 * self.m_t + (1 - self.beta_1) * g_t
         self.v_t = self.beta_2 * self.v_t + (1 - self.beta_2) * g_t * g_t
@@ -98,23 +98,25 @@ def test_sgd(epochs=1000, training_loss=LogisticModel().training_loss):
 
 
 def test_adam(step=1, epochs=1000):
-    weights = np.array([0., 0., 0.])
     # lgmodel
     lgmodel = LogisticModel()
     inputs, targets, training_loss = lgmodel.inputs, lgmodel.targets, lgmodel.training_loss
+    weights = np.array([0., 0., 0.]).reshape(-1, 1)
     # adam
-    print("adam")
-    adam = Adam(weights=weights, grad_function=grad(training_loss), learning_rate=0.01)
+    # g_t = np.dot(inputs.T, np.array([1]*inputs.shape[0]).reshape(-1, 1))
+    # print("g_t", wrapper(g_t))
+    g_t = lgmodel.numerical_loss(lambda x: np.sum(np.dot(inputs, x)), np.random.random((3, 1)))
+    # print("check grad", wrapper(check_grad))
+
+    print("adam train")
+    adam = Adam(weights=weights, learning_rate=0.01)
     for i in range(epochs):
-        weights = adam.theta_t.copy().reshape(-1, 1)
-        adam.minimize()
+        weights = adam.theta_t.copy()
+        adam.minimize(g_t)
         dot1 = np.dot(inputs, weights)
-        preds = 1 / (1 + np.exp(-dot1))  # y = 1 / (1+e^{-x})
-        labels_pro = preds * targets + (1 - preds) * (1 - targets)
-        log_pro = np.log(labels_pro)
-        loss = - np.sum(log_pro)
+        loss = np.sum(dot1)
         if i % step == 0:
-            print("iteration: {}, loss: {}, weights: {}, preds: {}, labels_pro: {}".format(i, loss, adam.theta_t, wrapper(preds), wrapper(labels_pro)))
+            print("iteration: {}, loss: {}, weights: {}".format(i, loss, wrapper(adam.theta_t)))
 
 
 if __name__ == '__main__':

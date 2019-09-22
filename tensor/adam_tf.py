@@ -22,10 +22,11 @@ def test_tensorflow(step=1, epochs=1000):
 
     # get loss
     dot1 = tf.matmul(inputs, weights)
-    preds = tf.sigmoid(dot1)
-    labels_pro = preds * targets + (1 - preds) * (1 - targets)
-    log_pro = tf.log(labels_pro)
-    loss = - tf.reduce_sum(log_pro)
+    # preds = tf.sigmoid(dot1)
+    # labels_pro = preds * targets + (1 - preds) * (1 - targets)
+    # log_pro = tf.log(labels_pro)
+    # loss = - tf.reduce_sum(log_pro)
+    loss = tf.reduce_sum(dot1)
 
     # add adam
     adam = tf.train.AdamOptimizer(0.01)
@@ -38,15 +39,9 @@ def test_tensorflow(step=1, epochs=1000):
     print("tensorflow train: ")
 
     for i in range(epochs):
-        # _, loss, dot1, preds, labels_pro, log_pro = sess.run([opt_op, loss, dot1, preds, labels_pro, log_pro])
-        # print(wrapper(dot1))
-        # print(wrapper(preds))
-        # print(wrapper(labels_pro))
-        # print(wrapper(log_pro))
-        # print(loss)
-        outs = sess.run([opt_op, loss, weights, preds, labels_pro])
+        outs = sess.run([opt_op, loss, weights])
         if i % step == 0:
-            print("iteration: {}, loss: {}, weights: {}, preds: {}, labels_pro: {}".format(i, outs[1], wrapper(outs[2]), wrapper(outs[3]), wrapper(outs[4])))
+            print("iteration: {}, loss: {}, weights: {}".format(i, outs[1], wrapper(outs[2])))
 
 
 if __name__ == '__main__':

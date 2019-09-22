@@ -2,19 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3f3a8e00-f8ab-4d27-99d9-71e9e35a06df" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/tensor/ex.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tensor/ex1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gcn/inits.py" beforeDir="false" afterPath="$PROJECT_DIR$/gcn/inits.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gcn/layers.py" beforeDir="false" afterPath="$PROJECT_DIR$/gcn/layers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gcn/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/gcn/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gcn/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/gcn/train.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gcn/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/gcn/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layers/gcnModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/layers/gcnModel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layers/hiddenLayer.py" beforeDir="false" afterPath="$PROJECT_DIR$/layers/hiddenLayer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layers/lossLayer.py" beforeDir="false" afterPath="$PROJECT_DIR$/layers/lossLayer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layers/softmax_regularize.py" beforeDir="false" afterPath="$PROJECT_DIR$/layers/softmax_regularize.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layers/softmaxloss.py" beforeDir="false" afterPath="$PROJECT_DIR$/layers/softmaxloss.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tensor/adam_ex1.py" beforeDir="false" afterPath="$PROJECT_DIR$/tensor/adam_ex1.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tensor/adam_tf.py" beforeDir="false" afterPath="$PROJECT_DIR$/tensor/adam_tf.py" afterDir="false" />
     </list>
@@ -43,14 +30,14 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.28351206">
+    <splitter split-orientation="horizontal" split-proportion="0.65348524">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/tensor/adam_ex1.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="75">
-                  <caret line="110" column="36" lean-forward="true" selection-start-line="110" selection-start-column="36" selection-end-line="110" selection-end-column="36" />
+                <state relative-caret-position="70">
+                  <caret line="107" column="7" selection-start-line="107" selection-start-column="7" selection-end-line="107" selection-end-column="7" />
                   <folding>
                     <element signature="e#21#80#0" expanded="true" />
                   </folding>
@@ -61,73 +48,44 @@
         </leaf>
       </split-first>
       <split-second>
-        <splitter split-orientation="horizontal" split-proportion="0.7229478">
-          <split-first>
-            <leaf>
-              <file pinned="false" current-in-tab="true">
-                <entry file="file://$PROJECT_DIR$/tensor/adam_tf.py">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="86">
-                      <caret line="52" column="23" lean-forward="true" selection-start-line="52" selection-start-column="23" selection-end-line="52" selection-end-column="23" />
-                      <folding>
-                        <element signature="e#0#23#0" expanded="true" />
-                      </folding>
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-              <file pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/tensor/demo.py">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="396">
-                      <caret line="22" column="28" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
-                      <folding>
-                        <element signature="e#0#23#0" expanded="true" />
-                      </folding>
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-              <file pinned="false" current-in-tab="false">
-                <entry file="file://$PROJECT_DIR$/tensor/ex1.py">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="180">
-                      <caret line="18" column="18" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
-                      <folding>
-                        <element signature="e#0#23#0" expanded="true" />
-                      </folding>
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-            </leaf>
-          </split-first>
-          <split-second>
-            <leaf>
-              <file pinned="false" current-in-tab="true">
-                <entry file="file://$PROJECT_DIR$/tensor/ex1.py">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="7">
-                      <caret line="8" column="50" selection-start-line="8" selection-start-column="50" selection-end-line="8" selection-end-column="50" />
-                      <folding>
-                        <element signature="e#0#23#0" expanded="true" />
-                      </folding>
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-              <file pinned="false" current-in-tab="false">
-                <entry file="file://C:/Python36/Lib/site-packages/tensorflow/python/ops/math_ops.py">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="280">
-                      <caret line="2981" column="17" lean-forward="true" selection-start-line="2981" selection-start-column="17" selection-end-line="2981" selection-end-column="38" />
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-            </leaf>
-          </split-second>
-        </splitter>
+        <leaf>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/tensor/adam_tf.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="90">
+                  <caret line="48" column="22" lean-forward="true" selection-start-line="48" selection-start-column="22" selection-end-line="48" selection-end-column="22" />
+                  <folding>
+                    <element signature="e#0#23#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/tensor/demo.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="396">
+                  <caret line="22" column="28" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
+                  <folding>
+                    <element signature="e#0#23#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/tensor/ex1.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-46">
+                  <caret line="9" selection-start-line="9" selection-end-line="9" />
+                  <folding>
+                    <element signature="e#0#23#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
       </split-second>
     </splitter>
   </component>
@@ -218,8 +176,8 @@
         <option value="$PROJECT_DIR$/gcn/train.py" />
         <option value="$PROJECT_DIR$/gcn/model.py" />
         <option value="$PROJECT_DIR$/tensor/ex1.py" />
-        <option value="$PROJECT_DIR$/tensor/adam_ex1.py" />
         <option value="$PROJECT_DIR$/tensor/adam_tf.py" />
+        <option value="$PROJECT_DIR$/tensor/adam_ex1.py" />
       </list>
     </option>
   </component>
@@ -467,12 +425,12 @@
       <workItem from="1568977160002" duration="599000" />
       <workItem from="1569020666141" duration="9530000" />
       <workItem from="1569049192285" duration="2790000" />
-      <workItem from="1569113919238" duration="5007000" />
+      <workItem from="1569113919238" duration="6462000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="199852000" />
+    <option name="totallyTimeSpent" value="201307000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -500,8 +458,8 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.40114614" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.30802602" />
-      <window_info active="true" anchor="bottom" id="Python Console" order="12" visible="true" weight="0.6090652" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.30736545" />
+      <window_info active="true" anchor="bottom" id="Python Console" order="12" visible="true" weight="0.62889516" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -839,16 +797,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tensor/demo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="22" column="28" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Python36/Lib/site-packages/tensorflow/python/ops/math_ops.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="280">
@@ -866,10 +814,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/tensor/demo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="22" column="28" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/tensor/ex1.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="18" column="18" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
+        <state relative-caret-position="-46">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tensor/adam_tf.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="48" column="22" lean-forward="true" selection-start-line="48" selection-start-column="22" selection-end-line="48" selection-end-column="22" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
           </folding>
@@ -878,20 +846,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tensor/adam_ex1.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="110" column="36" lean-forward="true" selection-start-line="110" selection-start-column="36" selection-end-line="110" selection-end-column="36" />
+        <state relative-caret-position="70">
+          <caret line="107" column="7" selection-start-line="107" selection-start-column="7" selection-end-line="107" selection-end-column="7" />
           <folding>
             <element signature="e#21#80#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tensor/adam_tf.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="86">
-          <caret line="52" column="23" lean-forward="true" selection-start-line="52" selection-start-column="23" selection-end-line="52" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
           </folding>
         </state>
       </provider>
