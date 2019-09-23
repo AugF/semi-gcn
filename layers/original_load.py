@@ -56,11 +56,11 @@ def load_data(dataset_str="cora"):
     # 1. get adj
     adj = nx.adjacency_matrix(nx.from_dict_of_lists(graph))  # csr_matrix,  (2708, 2708) row compressed toarray
 
+    # 2. get ordered features and labels
     index = parse_index_file("../data/ind.{}.test.index".format(dataset_str))  # 1708~2707 乱序
-
-    # 2. get ordered features and labes
-    features = sp.vstack((allx, tx)).tolil()  # lil_matrix, todense  position
     index_sorted = np.sort(index)
+
+    features = sp.vstack((allx, tx)).tolil()  # lil_matrix, todense  position
     features[index, ] = features[index_sorted, ]
 
     labels = np.vstack((ally, ty))
@@ -83,7 +83,6 @@ def load_data(dataset_str="cora"):
     y_val[val_mask, :] = labels[val_mask, :]
     y_test[test_mask, :] = labels[test_mask, :]
     return adj, features, y_train, y_val, y_test, train_mask, val_mask, test_mask
-
 
 
 def parse_index_file(filename):

@@ -1,11 +1,28 @@
 import numpy as np
 import scipy.sparse as sp
 
+# weights
 def init_Weight(shape):
     """Glorot & Bengio (AISTATS 2010) init"""
     init_range = np.sqrt(6.0 / (shape[0] + shape[1]))
     initial = np.random.uniform(low=-init_range, high=init_range, size=shape)
     return initial
+
+
+def get_Weight_from_file(weight_str):
+    if weight_str == "weights_outputs":
+        m, n = 16, 7
+    else:
+        m, n = 1433, 16
+    ans = np.zeros((m, n), dtype=np.float32)
+    import os
+    print(os.getcwd())
+    weight_path = "../weights/{}.txt".format(weight_str)
+    with open(weight_path, "r") as f:
+        for i, line in enumerate(f.readlines()):
+            for j, v in enumerate(line.strip().split(" ")):
+                ans[i, j] = float(v)
+    return ans
 
 
 def init_dropout(shape, dropout):
@@ -51,7 +68,6 @@ def preprocess_features(features):
     r_inv[np.isinf(r_inv)] = 0.
     r_mat_inv = sp.diags(r_inv)
     features = r_mat_inv.dot(features)
-    # return sparse_to_tuple(features)
     return features.todense()
 
 # prepare adj

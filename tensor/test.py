@@ -38,10 +38,14 @@ def test_random_uniform():
     """can't test"""
     shape = 4, 5
     init_range = np.sqrt(6.0 / (shape[0]*shape[1]))
+    np.random.seed(1)
     np_weight_init = np.random.uniform(low=-init_range, high=init_range, size=shape)
     sess = tf.Session()
+    tf.random.set_random_seed(1)
     weight_init = tf.random_uniform(shape, minval=-init_range, maxval=init_range, dtype=tf.float32)
     tf_weight_init = sess.run(weight_init)
+    print("np_weight_init", np_weight_init)
+    print("tf_weight_init", tf_weight_init)
 
 
 def test_soft_cross_entropy():
@@ -106,5 +110,38 @@ def test_write_log(log_str="test"):
 def testfun(x=1):
     return x
 
-if __name__ == '__main__':
-    f = lambda _: testfun("2")
+def test_relu():
+    x = np.random.random((2, 2))
+    with tf.Session() as sess:
+        tf_relu = sess.run(tf.nn.relu(x))
+        np_relu = np.maximum(x, 0)
+        print("tf_relu", tf_relu)
+        print("np_relu", np_relu)
+
+
+def print_seed():
+    print(np.random.get_state()[1][0])
+
+
+def test_writeAndread():
+    m, n = 2, 2
+    log_file_path = "../log/test.txt"
+    res = np.random.random((m, n))
+    with open(log_file_path, "w") as f:
+        for i in range(m):
+            for j in range(n):
+                f.write(str(res[i, j]) + " ")
+            f.write("\n")
+
+    ans = np.zeros((m, n), dtype=np.float)
+    with open(log_file_path, "r") as f:
+        for i, line in enumerate(f.readlines()):
+            for j, v in enumerate(line.strip().split(" ")):
+                ans[i, j] = float(v)
+    print("res", res)
+    print("ans", ans)
+    print("res == ans", (res == ans).all())
+
+
+
+
