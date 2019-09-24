@@ -19,8 +19,6 @@ def get_Weight_from_file(weight_str):
     else:
         m, n = 2708, 7
     ans = np.zeros((m, n), dtype=np.float32)
-    import os
-    print(os.getcwd())
     weight_path = "../weights/{}.txt".format(weight_str)
     with open(weight_path, "r") as f:
         for i, line in enumerate(f.readlines()):

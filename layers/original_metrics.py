@@ -1,12 +1,17 @@
 import numpy as np
+import tensorflow as tf
+
 from layers.original_utils import softmax
+
+def wrapper(x):
+    return x.reshape(x.shape[0],)
 
 # cross-entrocpy loss
 def forward_cross_entrocpy_loss(outputs, y_onehot, mask):
     """y_onehot: one_hot. train_mask: []"""
     softmax_x = softmax(outputs)
     cross_sum = -np.multiply(y_onehot, np.log(softmax_x))
-    cross_sum = (lambda x: x.reshape(x.shape[0],))(np.sum(cross_sum, axis=1)).astype(np.float32)
+    cross_sum = wrapper(np.sum(cross_sum, axis=1)).astype(np.float32)  # todo, attention shape here!
     # start operation
     mask = np.array(mask, dtype=np.float32)
     mask /= np.mean(mask)
@@ -31,9 +36,21 @@ def l2_loss(X):
 # acc
 def masked_accuracy(preds, labels, mask):
     """Accuracy with masking"""
-    correct_predictions = np.equal(np.argmax(preds, axis=1), np.argmax(labels, axis=1))
+    preds_max = np.argmax(preds, axis=1)
+    labels_max = np.argmax(labels, axis=1)
+    correct_predictions = np.equal(wrapper(preds_max), labels_max)
     accuracy_all = np.array(correct_predictions, dtype=np.float32)
     mask = np.array(mask, dtype=np.float32)
     mask /= np.mean(mask)
     accuracy_all *= mask
     return np.mean(accuracy_all)
+
+
+def tf_masked_accuracy(preds, labels, mask):
+    """Accuracy with masking."""
+    correct_prediction = tf.equal(tf.argmax(preds, 1), tf.argmax(labels, 1))
+    accuracy_all = tf.cast(correct_prediction, tf.float32)
+    mask = tf.cast(mask, dtype=tf.float32)
+    mask /= tf.reduce_mean(mask)
+    accuracy_all *= mask
+    return tf.reduce_mean(accuracy_all)

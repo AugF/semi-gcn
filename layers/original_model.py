@@ -45,18 +45,18 @@ class GCN:
         hidden = forward_hidden(self.adj, self.features, self.weight_hidden, act=lambda x: np.maximum(x, 0))
         outputs = forward_hidden(self.adj, hidden, self.weight_outputs)
         loss = forward_cross_entrocpy_loss(outputs, y_train, train_mask)
-        loss = self.weight_decay * l2_loss(self.weight_hidden)
+        loss += self.weight_decay * l2_loss(self.weight_hidden)
         acc = masked_accuracy(outputs, y_train, train_mask)
         return loss, acc
 
     def one_train(self):
         self.hidden = forward_hidden(self.adj, self.features, self.weight_hidden, act=lambda x: np.maximum(x, 0))  # the first hidden
         self.outputs = forward_hidden(self.adj, self.hidden, self.weight_outputs)
-        # test
         loss = forward_cross_entrocpy_loss(self.outputs, self.y_train, self.train_mask)
         weight_decay_loss = self.weight_decay * l2_loss(self.weight_hidden)
+        loss += weight_decay_loss
         acc = masked_accuracy(self.outputs, self.y_train, self.train_mask)
-        return loss, acc, weight_decay_loss
+        return loss, acc
 
     def one_update(self):
         y_train, train_mask = self.y_train, self.train_mask
