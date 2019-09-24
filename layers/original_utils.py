@@ -6,14 +6,6 @@ def onehot(y, c):
         res[i, j] = 1
     return res
 
-
-def l2_loss(X):
-    """for matrix, tf.nn.l2_loss: np.sum(x**2)/2"""
-    x_square = X ** 2
-    x_sum = np.sum(x_square)
-    x_l2 = x_sum / 2
-    return x_l2
-
 def softmax(X):
     """softmax x"""
     exp_x = np.exp(X)
@@ -35,3 +27,12 @@ def numerical_grad(f, X, h=1e-5):
             grad[i, j] = (loss1 - loss2) / (2*h)
             X[i, j] += h
     return grad
+
+def save_weight(file_str, target):
+    file_path = "../weights/{}.txt".format(file_str)
+    m, n = target.shape
+    with open(file_path, "w") as f:
+        for i in range(m):
+            for j in range(n):
+                f.write(str(target[i, j]) + " ")
+            f.write("\n")

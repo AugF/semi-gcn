@@ -1,5 +1,8 @@
 from layers.original_layers import *
-from layers.original_inits import get_Weight_from_file
+from layers.original_metrics import *
+from layers.original_inits import *
+from layers.original_utils import *
+from layers.original_optimizer import Adam
 
 class GCN:
     """GCN"""
@@ -47,13 +50,12 @@ class GCN:
         return loss, acc
 
     def one_train(self):
-        y_train, train_mask = self.y_train, self.train_mask
         self.hidden = forward_hidden(self.adj, self.features, self.weight_hidden, act=lambda x: np.maximum(x, 0))  # the first hidden
         self.outputs = forward_hidden(self.adj, self.hidden, self.weight_outputs)
-        loss = forward_cross_entrocpy_loss(self.outputs, y_train, train_mask)    # add weight decay loss
+        # test
+        loss = forward_cross_entrocpy_loss(self.outputs, self.y_train, self.train_mask)
         weight_decay_loss = self.weight_decay * l2_loss(self.weight_hidden)
-        loss += weight_decay_loss
-        acc = masked_accuracy(self.outputs, y_train, train_mask)
+        acc = masked_accuracy(self.outputs, self.y_train, self.train_mask)
         return loss, acc, weight_decay_loss
 
     def one_update(self):

@@ -12,8 +12,12 @@ def init_Weight(shape):
 def get_Weight_from_file(weight_str):
     if weight_str == "weights_outputs":
         m, n = 16, 7
-    else:
+    elif weight_str == "weights_hidden":
         m, n = 1433, 16
+    elif weight_str == "hidden":
+        m, n = 2708, 16
+    else:
+        m, n = 2708, 7
     ans = np.zeros((m, n), dtype=np.float32)
     import os
     print(os.getcwd())
@@ -30,16 +34,6 @@ def init_dropout(shape, dropout):
     col = np.array([1] * shape[0]).reshape(-1, 1)
     mat = np.repeat(col, shape[1], axis=1)
     return np.random.binomial(mat, dropout)
-
-
-def masked_accuracy(preds, labels, mask):
-    """Accuracy with masking"""
-    correct_predictions = np.equal(np.argmax(preds, axis=1), np.argmax(labels, axis=1))
-    accuracy_all = np.array(correct_predictions, dtype=np.float32)
-    mask = np.array(mask, dtype=np.float32)
-    mask /= np.mean(mask)
-    accuracy_all *= mask
-    return np.mean(accuracy_all)
 
 
 def sparse_to_tuple(sparse_mx):
@@ -86,28 +80,3 @@ def preprocess_adj(adj):
     adj_normalized = normalize_adj(adj + sp.eye(adj.shape[0]))
     # return sparse_to_tuple(adj_normalized)
     return adj_normalized.todense()
-
-
-
-class Adam:
-    """adam optimizer"""
-    def __init__(self, weights, learning_rate=0.001):
-        """params, init"""
-        self.learning_rate = learning_rate
-        self.theta_t = weights
-        self.beta_1 = 0.9
-        self.beta_2 = 0.999
-        self.epsilon = 1e-8
-        self.m_t = np.zeros(weights.shape)
-        self.v_t = np.zeros(weights.shape)
-        self.t = 0
-        # self.grad_function = grad_function
-
-    def minimize(self, g_t):
-        """more efficient"""
-        self.t += 1
-        # g_t = self.grad_function(self.theta_t)
-        alpha_t = self.learning_rate * ((1 - self.beta_2 ** self.t) ** 0.5) / (1 - self.beta_1 ** self.t)
-        self.m_t = self.beta_1 * self.m_t + (1 - self.beta_1) * g_t
-        self.v_t = self.beta_2 * self.v_t + (1 - self.beta_2) * np.multiply(g_t, g_t)
-        self.theta_t -= alpha_t * self.m_t / (np.power(self.v_t, 0.5) + self.epsilon)  # test

@@ -1,22 +1,5 @@
 import numpy as np
-from layers.original_utils import onehot, softmax, numerical_grad, l2_loss
-from layers.original_inits import init_Weight, init_dropout, Adam, masked_accuracy, preprocess_features, preprocess_adj
-from layers.original_load import load_data, sample_mask, prepare_gcn
-
-# cross-entrocpy loss
-def forward_cross_entrocpy_loss(outputs, y_onehot, train_mask):
-    """y_onehot: one_hot. train_mask: []"""
-    softmax_x = softmax(outputs)
-    cross_sum = -np.multiply(y_onehot, np.log(softmax_x))
-    cross_sum = np.sum(cross_sum, axis=1)
-    cross_real = np.multiply(cross_sum, train_mask)
-    return np.mean(cross_real)
-
-def backward_cross_entrocpy_loss(outputs, y_onehot, train_mask):
-    """require shape: outputs.shape"""
-    dX = softmax(outputs) - y_onehot
-    dX = np.multiply(dX, train_mask.reshape(-1, 1))
-    return dX / outputs.shape[0]
+from layers.original_inits import *
 
 # hidden
 

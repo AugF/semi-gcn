@@ -1,7 +1,6 @@
 import numpy as np
 import tensorflow as tf
-from layers.original_utils import onehot
-from layers.original_layers import softmax
+from layers.original_utils import *
 
 def test_tf_reduce_mean():
     x = np.random.random((4, 5))
@@ -143,5 +142,5 @@ def test_writeAndread():
     print("res == ans", (res == ans).all())
 
 
-
-
+if __name__ == '__main__':
+    test_soft_cross_entropy()
