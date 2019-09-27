@@ -39,8 +39,9 @@ def train_gcn(early_stopping=10, ephochs=200, data_str="cora", dropout=0.5, hidd
         if i > early_stopping and cost_val[-1] > np.mean(cost_val[-(early_stopping + 1): -1]):
             print("early stopping ! ")
 
-    # test_loss, test_acc = model.test()
-    # print("start test, the loss: {}, the acc: {}".format(test_loss, test_acc))
+    test_loss, test_acc = model.test()
+    print("start test, the loss: {}, the acc: {}".format(test_loss, test_acc))
+    # model test to save
 
 if __name__ == '__main__':
     train_gcn()
