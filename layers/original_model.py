@@ -6,7 +6,7 @@ from layers.original_optimizer import Adam
 
 class GCN:
     """GCN"""
-    def __init__(self, load_data_function, hidden_unit=16, learning_rate=0.01, weight_decay=5e-4):
+    def __init__(self, load_data_function, data_str="cora", hidden_unit=16, learning_rate=0.01, weight_decay=5e-4):
         adj, features, y_train, y_val, y_test, train_mask, val_mask, test_mask = load_data_function(0)
         self.adj, self.features = preprocess_adj(adj), preprocess_features(features)  # preprocess
 
@@ -19,8 +19,9 @@ class GCN:
         # init weight
         # self.weight_hidden = init_Weight((self.f, self.h))
         # self.weight_outputs = init_Weight((self.h, self.c))
-        self.weight_hidden = get_Weight_from_file("weights_hidden")
-        self.weight_outputs = get_Weight_from_file("weights_outputs")
+        print(data_str + "_weights_hidden")
+        self.weight_hidden = get_Weight_from_file((self.f, self.h), data_str + "_weights_hidden")
+        self.weight_outputs = get_Weight_from_file((self.h, self.c), data_str + "_weights_outputs")
 
         self.adam_weight_hidden = Adam(weights=self.weight_hidden, learning_rate=learning_rate)
         self.adam_weight_outputs = Adam(weights=self.weight_outputs, learning_rate=learning_rate)

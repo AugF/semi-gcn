@@ -9,15 +9,8 @@ def init_Weight(shape):
     return initial
 
 
-def get_Weight_from_file(weight_str):
-    if weight_str == "weights_outputs":
-        m, n = 16, 7
-    elif weight_str == "weights_hidden":
-        m, n = 1433, 16
-    elif weight_str == "hidden":
-        m, n = 2708, 16
-    else:
-        m, n = 2708, 7
+def get_Weight_from_file(shape, weight_str):
+    m, n = shape
     ans = np.zeros((m, n), dtype=np.float32)
     weight_path = "../weights/{}.txt".format(weight_str)
     with open(weight_path, "r") as f:
