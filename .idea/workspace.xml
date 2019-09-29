@@ -3,12 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3f3a8e00-f8ab-4d27-99d9-71e9e35a06df" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layers/original_inits.py" beforeDir="false" afterPath="$PROJECT_DIR$/layers/original_inits.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layers/original_load.py" beforeDir="false" afterPath="$PROJECT_DIR$/layers/original_load.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layers/original_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/layers/original_model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/layers/original_train.py" beforeDir="false" afterPath="$PROJECT_DIR$/layers/original_train.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/weights/weights_hidden.txt" beforeDir="false" afterPath="$PROJECT_DIR$/weights/cora_weights_hidden.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/weights/weights_outputs.txt" beforeDir="false" afterPath="$PROJECT_DIR$/weights/cora_weights_outputs.txt" afterDir="false" />
     </list>
     <list id="5f6e0f6d-d706-45c7-92ae-e3d0c0758781" name="loss without weight_decay" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -47,12 +42,6 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
-  </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-9" />
-    <option name="y" value="-9" />
-    <option name="width" value="1938" />
-    <option name="height" value="1048" />
   </component>
   <component name="ProjectId" id="1RVMbdbTo4PLiTjtc7cfWLUjX9W" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
