@@ -32,17 +32,12 @@ if __name__ == '__main__':
         # print("model outputs", model.outputs)
         # print("model weight_hidden", model.weight_hidden)
 
+        print("model adam checked weight_outputs",  model.weight_outputs)
+        print("model adam checked weight_outputs",  model.weight_hidden)
         model.one_update()
-        print("numpy grad_weight_outputs", model.grad_weight_outputs)
-        # print("numpy grad_hidden", model.grad_hidden)
-        print("numpy grad_weight_hidden", model.grad_weight_hidden)
+        print("model adam checked weight_outputs",  model.weight_outputs)
+        print("model adam checked weight_outputs",  model.weight_hidden)
 
-        # single test back_forward_cross
-
-        # the real result
-        f = lambda x: forward_cross_entrocpy_loss(x, model.y_train, model.train_mask) + model.weight_decay * l2_loss(model.weight_hidden)
-        grad_real = numerical_grad(f, model.outputs)
-        print("grad_real", grad_real)
         break
         # val step
         # val_loss, val_acc = model.evaluate()
