@@ -21,8 +21,28 @@ def forward_cross_entrocpy_loss(outputs, y_onehot, mask):
 def backward_cross_entrocpy_loss(outputs, y_onehot, train_mask):
     """require shape: outputs.shape"""
     dX = softmax(outputs) - y_onehot
-    dX = np.multiply(dX, train_mask.reshape(-1, 1))
+    # mask
+    mask = np.array(train_mask, dtype=np.float32)
+    mask /= np.mean(mask)
+    dX = np.multiply(dX, mask.reshape(-1, 1))
     return dX / outputs.shape[0]
+
+if __name__ == '__main__':
+    import numpy as np
+    from layers.original_utils import onehot, numerical_grad
+    from layers.original_load import sample_mask
+
+    n, c = 2708, 7
+    outputs = np.random.random((n, c))
+    y_real = np.random.randint(low=0, high=c, size=(n, ))
+    y_onehot = onehot(y_real, c)
+    train_mask = sample_mask(range(500), (n, ))
+
+    f = lambda x: forward_cross_entrocpy_loss(x, y_onehot, train_mask)
+    np_grad = backward_cross_entrocpy_loss(outputs, y_onehot, train_mask)
+    real_grad = numerical_grad(f, outputs)
+    print("np_grad", np_grad)
+    print("real_grad", real_grad)
 
 
 # l2 loss

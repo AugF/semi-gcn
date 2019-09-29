@@ -33,7 +33,9 @@ if __name__ == '__main__':
         # print("model weight_hidden", model.weight_hidden)
 
         model.one_update()
-        print("numpy grad_loss", model.grad_loss * 20)  # seem
+        print("numpy grad_loss", model.grad_loss)  # seem
+
+        # single test back_forward_cross
 
         # the real result
         f = lambda x: forward_cross_entrocpy_loss(x, model.y_train, model.train_mask) + model.weight_decay * l2_loss(model.weight_hidden)
