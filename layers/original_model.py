@@ -19,7 +19,6 @@ class GCN:
         # init weight
         # self.weight_hidden = init_Weight((self.f, self.h))
         # self.weight_outputs = init_Weight((self.h, self.c))
-        print(data_str + "_weights_hidden")
         self.weight_hidden = get_Weight_from_file((self.f, self.h), data_str + "_weights_hidden")
         self.weight_outputs = get_Weight_from_file((self.h, self.c), data_str + "_weights_outputs")
 
