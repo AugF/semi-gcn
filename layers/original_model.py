@@ -32,6 +32,9 @@ class GCN:
 
         # test
         self.grad_loss = None
+        self.grad_weight_outputs = None
+        self.grad_hidden = None
+        self.grad_weight_hidden = None
 
 
     def evaluate(self):
@@ -70,10 +73,9 @@ class GCN:
         grad_weight_hidden += self.weight_decay * self.weight_hidden  # weight_decay backward
 
         self.grad_loss = grad_loss
-        # print("grad_loss", grad_loss)
-        # print("grad_weight_outputs", grad_weight_outputs)
-        # print("grad_hidden", grad_hidden)
-        # print("grad_weight-hidden", grad_weight_hidden)
+        self.grad_weight_outputs = grad_weight_outputs
+        self.grad_hidden = grad_hidden
+        self.grad_weight_hidden = grad_weight_hidden
 
         self.adam_weight_hidden.minimize(grad_weight_hidden)
         self.adam_weight_outputs.minimize(grad_weight_outputs)

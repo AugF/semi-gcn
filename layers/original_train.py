@@ -33,7 +33,9 @@ if __name__ == '__main__':
         # print("model weight_hidden", model.weight_hidden)
 
         model.one_update()
-        print("numpy grad_loss", model.grad_loss)  # seem
+        print("numpy grad_weight_outputs", model.grad_weight_outputs)
+        # print("numpy grad_hidden", model.grad_hidden)
+        print("numpy grad_weight_hidden", model.grad_weight_hidden)
 
         # single test back_forward_cross
 
