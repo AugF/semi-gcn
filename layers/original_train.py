@@ -28,18 +28,23 @@ if __name__ == '__main__':
     for i in range(ephochs):
         # train step
         train_loss, train_acc = model.one_train()
-        model.one_update()
+        # print("model loss", train_loss)
+        # print("model outputs", model.outputs)
+        # print("model weight_hidden", model.weight_hidden)
 
-        print("model loss", train_loss)
-        print("model outputs", model.outputs)
+        adj, features, y_train, y_val, y_test, train_mask, val_mask, test_mask = load_data_function(0)
+
+        # model.one_update()
 
         # the real result
-        f_without_weight_decay = lambda x: forward_cross_entrocpy_loss(x, model.y_train, model.train_mask)
-        f = lambda x: forward_cross_entrocpy_loss(x, model.y_train, model.train_mask) + model.weight_decay * model.weight_hidden
+        y = y_train.copy()
+        mask = train_mask.copy()
+        f = lambda x: forward_cross_entrocpy_loss(x, y, mask)
 
-        grad_real = numerical_grad(f, model.outputs)
+        outputs = model.outputs.copy()
+        grad_real = numerical_grad(f, outputs)
         print("grad_real", grad_real)
-        # break
+        break
         # val step
         # val_loss, val_acc = model.evaluate()
         # print("iteration: {}, train_loss: {}, train_acc: {}, val_loss: {}, val_acc: {}".
