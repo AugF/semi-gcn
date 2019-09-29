@@ -30,6 +30,9 @@ class GCN:
 
         self.weight_decay = weight_decay
 
+        # test
+        self.grad_loss = None
+
 
     def evaluate(self):
         y_train, train_mask = self.y_val, self.val_mask
@@ -65,6 +68,12 @@ class GCN:
 
         _, grad_weight_hidden = backward_hidden(self.adj, self.features, self.weight_hidden, grad_hidden, backward_act=lambda x: np.where(x <= 0, 0, 1))
         grad_weight_hidden += self.weight_decay * self.weight_hidden  # weight_decay backward
+
+        self.grad_loss = grad_loss
+        # print("grad_loss", grad_loss)
+        # print("grad_weight_outputs", grad_weight_outputs)
+        # print("grad_hidden", grad_hidden)
+        # print("grad_weight-hidden", grad_weight_hidden)
 
         self.adam_weight_hidden.minimize(grad_weight_hidden)
         self.adam_weight_outputs.minimize(grad_weight_outputs)
