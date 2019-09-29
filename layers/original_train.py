@@ -32,17 +32,12 @@ if __name__ == '__main__':
         # print("model outputs", model.outputs)
         # print("model weight_hidden", model.weight_hidden)
 
-        adj, features, y_train, y_val, y_test, train_mask, val_mask, test_mask = load_data_function(0)
-
-        # model.one_update()
+        model.one_update()
 
         # the real result
-        y = y_train.copy()
-        mask = train_mask.copy()
-        f = lambda x: forward_cross_entrocpy_loss(x, y, mask)
+        f = lambda x: forward_cross_entrocpy_loss(x, model.y_train, model.train_mask) + model.weight_decay * l2_loss(model.weight_hidden)
 
-        outputs = model.outputs.copy()
-        grad_real = numerical_grad(f, outputs)
+        grad_real = numerical_grad(f, model.outputs)
         print("grad_real", grad_real)
         break
         # val step
