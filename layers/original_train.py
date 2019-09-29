@@ -29,13 +29,16 @@ if __name__ == '__main__':
         # train step
         train_loss, train_acc = model.one_train()
         # print("model loss", train_loss)
+        print("before adam checked weight_outputs",  model.weight_outputs)
+        print("before adam checked weight_hidden",  model.weight_hidden)
+
         model.one_update()
-        print("model outputs", model.outputs)
-        print("model weight_outputs", model.grad_weight_outputs)
-        print("model weight_hidden", model.grad_weight_hidden)
+        # print("model outputs", model.outputs)
+        # print("model weight_outputs", model.grad_weight_outputs)
+        # print("model weight_hidden", model.grad_weight_hidden)
+        print("after adam checked weight_outputs",  model.weight_outputs)
+        print("after adam checked weight_hidden",  model.weight_hidden)
         break
-        # print("model adam checked weight_outputs",  model.weight_outputs)
-        # print("model adam checked weight_outputs",  model.weight_hidden)
     #
     #     # val step
     #     val_loss, val_acc = model.evaluate()
