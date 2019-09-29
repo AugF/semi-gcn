@@ -32,23 +32,21 @@ if __name__ == '__main__':
         # print("model outputs", model.outputs)
         # print("model weight_hidden", model.weight_hidden)
 
-        print("model adam checked weight_outputs",  model.weight_outputs)
-        print("model adam checked weight_outputs",  model.weight_hidden)
+        # print("model adam checked weight_outputs",  model.weight_outputs)
+        # print("model adam checked weight_outputs",  model.weight_hidden)
         model.one_update()
-        print("model adam checked weight_outputs",  model.weight_outputs)
-        print("model adam checked weight_outputs",  model.weight_hidden)
 
-        break
         # val step
-        # val_loss, val_acc = model.evaluate()
-        # print("iteration: {}, train_loss: {}, train_acc: {}, val_loss: {}, val_acc: {}".
-        #       format(i, train_loss, train_acc, val_loss, val_acc))
-        # cost_val.append(val_loss)
-        #
-        # if i > early_stopping and cost_val[-1] > np.mean(cost_val[-(early_stopping + 1): -1]):
-        #     print("early stopping ! ")
+        val_loss, val_acc = model.evaluate()
+        print("iteration: {}, train_loss: {}, train_acc: {}, val_loss: {}, val_acc: {}".
+              format(i, train_loss, train_acc, val_loss, val_acc))
+        cost_val.append(val_loss)
+
+        if i > early_stopping and cost_val[-1] > np.mean(cost_val[-(early_stopping + 1): -1]):
+            print("early stopping ! ")
+            break
 
     # test step
-    # test_loss, test_acc = model.test()
-    # print("start test, the loss: {}, the acc: {}".format(test_loss, test_acc))
+    test_loss, test_acc = model.test()
+    print("start test, the loss: {}, the acc: {}".format(test_loss, test_acc))
 
