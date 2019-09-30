@@ -67,9 +67,9 @@ class GCN:
     def one_update(self):
         y_train, train_mask = self.y_train, self.train_mask
         grad_loss = backward_cross_entrocpy_loss(self.outputs, y_train, train_mask)
-        grad_hidden, grad_weight_outputs = backward_hidden(self.adj, self.hidden, self.weight_outputs, grad_loss)
+        grad_hidden, grad_weight_outputs = backward_hidden(self.adj, self.hidden, self.weight_outputs, grad_loss, mask=train_mask, mask_flag=True)
 
-        _, grad_weight_hidden = backward_hidden(self.adj, self.features, self.weight_hidden, grad_hidden, backward_act=lambda x: np.where(x <= 0, 0, 1))
+        _, grad_weight_hidden = backward_hidden(self.adj, self.features, self.weight_hidden, grad_hidden, mask=train_mask, backward_act=lambda x: np.where(x <= 0, 0, 1))
         grad_weight_hidden += self.weight_decay * self.weight_hidden  # weight_decay backward
 
         self.grad_loss = grad_loss

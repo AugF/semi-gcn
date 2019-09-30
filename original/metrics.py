@@ -60,8 +60,8 @@ def tf_masked_accuracy(preds, labels, mask):
 
 if __name__ == '__main__':
     import numpy as np
-    from layers.original_utils import onehot, numerical_grad
-    from layers.original_load import sample_mask
+    from original.utils import onehot, numerical_grad
+    from original.load import sample_mask
 
     n, c = 2708, 7
     outputs = np.random.random((n, c))
