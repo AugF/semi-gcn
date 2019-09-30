@@ -17,9 +17,9 @@ def masked_softmax_cross_entropy(preds, labels, mask):
     loss *= mask
     return tf.reduce_mean(loss), loss, mask
 
-if __name__ == '__main__':
-# def train_gcn(early_stopping=10, ephochs=200, data_str="cora", dropout=0.5, hidden_unit=16, learning_rate=0.01, weight_decay=5e-4):
-    early_stopping = 10; ephochs = 200; data_str = "pubmed"; dropout = 0.5; hidden_unit = 16; learning_rate = 0.01; weight_decay = 5e-4
+# if __name__ == '__main__':
+def train_gcn(early_stopping=10, ephochs=200, data_str="cora", dropout=0.5, hidden_unit=16, learning_rate=0.01, weight_decay=5e-4):
+#     early_stopping = 10; ephochs = 200; data_str = "pubmed"; dropout = 0.5; hidden_unit = 16; learning_rate = 0.01; weight_decay = 5e-4
     load_data_function = lambda x: gcn_load_data(data_str)
     model = GCN(load_data_function=load_data_function, data_str=data_str, hidden_unit=hidden_unit, learning_rate=learning_rate, weight_decay=weight_decay)
 
@@ -56,3 +56,8 @@ if __name__ == '__main__':
     save_weight(data_str + "train_weight_outputs", model.weight_outputs)
     save_weight(data_str + "train_weight_hidden", model.weight_hidden)
 
+
+if __name__ == '__main__':
+    train_gcn(ephochs=10, data_str="cora")
+    train_gcn(ephochs=10, data_str="citeseer")
+    train_gcn(ephochs=10, data_str="pubmed")

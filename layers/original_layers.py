@@ -1,5 +1,5 @@
 import numpy as np
-from layers.original_inits import *
+from layers.original_weights_preprocess import *
 
 # hidden
 
