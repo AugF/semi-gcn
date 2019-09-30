@@ -2,40 +2,68 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3f3a8e00-f8ab-4d27-99d9-71e9e35a06df" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/_weights/citeseer_weights_hidden.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_weights/citeseer_weights_outputs.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_weights/citeseertrain_weight_hidden.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_weights/citeseertrain_weight_outputs.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_weights/cora_weights_hidden.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_weights/cora_weights_outputs.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_weights/coratrain_weight_hidden.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_weights/coratrain_weight_outputs.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_weights/pubmed_weights_hidden.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_weights/pubmed_weights_outputs.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_weights/pubmedtrain_weight_hidden.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_weights/pubmedtrain_weight_outputs.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/git" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/original/layers.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/original/load.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/original/metrics.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/original/model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/original/optimizer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/original/train.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/original/utils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/original/vis_utils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/original/weights_preprocess.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/weights/citeseertrain_weight_hidden.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/weights/citeseertrain_weight_outputs.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/weights/coratrain_weight_hidden.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/weights/coratrain_weight_outputs.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/weights/pubmedtrain_weight_hidden.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/weights/pubmedtrain_weight_outputs.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layers/original_layers.py" beforeDir="false" afterPath="$PROJECT_DIR$/layers/original_layers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layers/original_load.py" beforeDir="false" afterPath="$PROJECT_DIR$/layers/original_load.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layers/original_metrics.py" beforeDir="false" afterPath="$PROJECT_DIR$/layers/original_metrics.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layers/original_train.py" beforeDir="false" afterPath="$PROJECT_DIR$/layers/original_train.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layers/original_weights_preprocess.py" beforeDir="false" afterPath="$PROJECT_DIR$/layers/original_weights_preprocess.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ind.citeseer.allx" beforeDir="false" afterPath="$PROJECT_DIR$/_data/ind.citeseer.allx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ind.citeseer.ally" beforeDir="false" afterPath="$PROJECT_DIR$/_data/ind.citeseer.ally" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ind.citeseer.graph" beforeDir="false" afterPath="$PROJECT_DIR$/_data/ind.citeseer.graph" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ind.citeseer.test.index" beforeDir="false" afterPath="$PROJECT_DIR$/_data/ind.citeseer.test.index" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ind.citeseer.tx" beforeDir="false" afterPath="$PROJECT_DIR$/_data/ind.citeseer.tx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ind.citeseer.ty" beforeDir="false" afterPath="$PROJECT_DIR$/_data/ind.citeseer.ty" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ind.citeseer.x" beforeDir="false" afterPath="$PROJECT_DIR$/_data/ind.citeseer.x" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ind.citeseer.y" beforeDir="false" afterPath="$PROJECT_DIR$/_data/ind.citeseer.y" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ind.cora.allx" beforeDir="false" afterPath="$PROJECT_DIR$/_data/ind.cora.allx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ind.cora.ally" beforeDir="false" afterPath="$PROJECT_DIR$/_data/ind.cora.ally" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ind.cora.graph" beforeDir="false" afterPath="$PROJECT_DIR$/_data/ind.cora.graph" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ind.cora.test.index" beforeDir="false" afterPath="$PROJECT_DIR$/_data/ind.cora.test.index" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ind.cora.tx" beforeDir="false" afterPath="$PROJECT_DIR$/_data/ind.cora.tx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ind.cora.ty" beforeDir="false" afterPath="$PROJECT_DIR$/_data/ind.cora.ty" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ind.cora.x" beforeDir="false" afterPath="$PROJECT_DIR$/_data/ind.cora.x" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ind.cora.y" beforeDir="false" afterPath="$PROJECT_DIR$/_data/ind.cora.y" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ind.pubmed.allx" beforeDir="false" afterPath="$PROJECT_DIR$/_data/ind.pubmed.allx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ind.pubmed.ally" beforeDir="false" afterPath="$PROJECT_DIR$/_data/ind.pubmed.ally" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ind.pubmed.graph" beforeDir="false" afterPath="$PROJECT_DIR$/_data/ind.pubmed.graph" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ind.pubmed.test.index" beforeDir="false" afterPath="$PROJECT_DIR$/_data/ind.pubmed.test.index" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ind.pubmed.tx" beforeDir="false" afterPath="$PROJECT_DIR$/_data/ind.pubmed.tx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ind.pubmed.ty" beforeDir="false" afterPath="$PROJECT_DIR$/_data/ind.pubmed.ty" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ind.pubmed.x" beforeDir="false" afterPath="$PROJECT_DIR$/_data/ind.pubmed.x" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ind.pubmed.y" beforeDir="false" afterPath="$PROJECT_DIR$/_data/ind.pubmed.y" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gcn/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gcn/adam.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gcn/inits.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gcn/layers.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gcn/loss.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gcn/model.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gcn/train.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gcn/utils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gcn/vis_utils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/layers/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/layers/gcn_load.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/layers/original_layers.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/layers/original_load.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/layers/original_metrics.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/layers/original_model.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/layers/original_optimizer.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/layers/original_test.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/layers/original_train.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/layers/original_utils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/layers/original_visutils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/layers/original_weights_preprocess.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/original/load.py" beforeDir="false" afterPath="$PROJECT_DIR$/original/load.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tensor/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tensor/adam_github.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tensor/adam_local.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tensor/adam_tf.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tensor/demoTf.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tensor/logical_modelNpVsTf.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tensor/sigmoidCheckGrad.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tensor/test.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/weights/citeseertrain_weight_hidden.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/weights/citeseertrain_weight_outputs.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/weights/cora_weights_hidden.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/weights/cora_weights_outputs.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/weights/coratrain_weight_hidden.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/weights/coratrain_weight_outputs.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/weights/pubmedtrain_weight_hidden.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/weights/pubmedtrain_weight_outputs.txt" beforeDir="false" />
     </list>
     <list id="5f6e0f6d-d706-45c7-92ae-e3d0c0758781" name="loss without weight_decay" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -110,7 +138,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.original_train">
+  <component name="RunManager" selected="Python.train">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="semi-gnn" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -181,6 +209,9 @@
       <module name="semi-gnn" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/layers" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -239,8 +270,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.original_train" />
         <item itemvalue="Python.train" />
+        <item itemvalue="Python.original_train" />
         <item itemvalue="Python.original_metrics" />
         <item itemvalue="Python.test" />
         <item itemvalue="Python.gcn_load" />

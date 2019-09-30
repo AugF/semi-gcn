@@ -36,7 +36,7 @@ def load_data(dataset_str="cora"):
     names = ['x', 'y', 'tx', 'ty', 'allx', 'ally', 'graph']
     objects = []
     for i in range(len(names)):
-        with open("../data/ind.{}.{}".format(dataset_str, names[i]), "rb") as f:
+        with open("../_data/ind.{}.{}".format(dataset_str, names[i]), "rb") as f:
             if sys.version_info > (3, 0):
                 objects.append(pkl.load(f, encoding='latin1'))
             else:
@@ -45,11 +45,11 @@ def load_data(dataset_str="cora"):
     x, y, tx, ty, allx, ally, graph = tuple(objects)
 
     # cora
-    # x: csr_matrix  (140, 1433)  y: array  (140, 7)  train data: labeled data
-    # tx: csr_matrix (1000, 1433) , ty    test data: labeled data
+    # x: csr_matrix  (140, 1433)  y: array  (140, 7)  train _data: labeled _data
+    # tx: csr_matrix (1000, 1433) , ty    test _data: labeled _data
     # allx: csr (1708, 1433)  ally
-    # labeled data(1640):  [0, 140] train_data  [140, 140+500] val_data (fix at 500)  [2708-1000, 2708] test_data
-    # unlabeled data(1068):  [740, 1708]
+    # labeled _data(1640):  [0, 140] train_data  [140, 140+500] val_data (fix at 500)  [2708-1000, 2708] test_data
+    # unlabeled _data(1068):  [740, 1708]
     # g: defaultdict (2708， ?)
 
     # y is one-hot (n, 7)
@@ -57,7 +57,7 @@ def load_data(dataset_str="cora"):
     adj = nx.adjacency_matrix(nx.from_dict_of_lists(graph))  # csr_matrix,  (2708, 2708) row compressed toarray
 
     # 2. get ordered features and labels
-    index = parse_index_file("../data/ind.{}.test.index".format(dataset_str))  # 1708~2707 乱序
+    index = parse_index_file("../_data/ind.{}.test.index".format(dataset_str))  # 1708~2707 乱序
     index_sorted = np.sort(index)
 
     features = sp.vstack((allx, tx)).tolil()  # lil_matrix, todense  position
@@ -103,7 +103,7 @@ def sample_mask(idx, l):
 
 def gcn_load_data(dataset_str):
     """
-    Loads input data from gcn/data directory
+    Loads input _data from gcn/_data directory
 
     ind.dataset_str.x => the feature vectors of the training instances as scipy.sparse.csr.csr_matrix object;
     ind.dataset_str.tx => the feature vectors of the test instances as scipy.sparse.csr.csr_matrix object;
@@ -119,19 +119,19 @@ def gcn_load_data(dataset_str):
     All objects above must be saved using python pickle module.
 
     :param dataset_str: Dataset name
-    :return: All data input files loaded (as well the training/test data).
+    :return: All _data input files loaded (as well the training/test _data).
     """
     names = ['x', 'y', 'tx', 'ty', 'allx', 'ally', 'graph']
     objects = []
     for i in range(len(names)):
-        with open("../data/ind.{}.{}".format(dataset_str, names[i]), 'rb') as f:
+        with open("../_data/ind.{}.{}".format(dataset_str, names[i]), 'rb') as f:
             if sys.version_info > (3, 0):
                 objects.append(pkl.load(f, encoding='latin1'))
             else:
                 objects.append(pkl.load(f))
 
     x, y, tx, ty, allx, ally, graph = tuple(objects)
-    test_idx_reorder = parse_index_file("../data/ind.{}.test.index".format(dataset_str))
+    test_idx_reorder = parse_index_file("../_data/ind.{}.test.index".format(dataset_str))
     test_idx_range = np.sort(test_idx_reorder)
 
     if dataset_str == 'citeseer':

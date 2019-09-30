@@ -9,7 +9,7 @@ def init_Weight(shape):
     return initial
 
 def save_weight(file_str, target):
-    file_path = "../weights/{}.txt".format(file_str)
+    file_path = "../_weights/{}.txt".format(file_str)
     m, n = target.shape
     with open(file_path, "w") as f:
         for i in range(m):
