@@ -53,8 +53,8 @@ def train_gcn(early_stopping=10, ephochs=200, data_str="cora", dropout=0.5, hidd
     # test step
     test_loss, test_acc = model.test()
     print("start test, the loss: {}, the acc: {}".format(test_loss, test_acc))
-    save_weight(data_str + "train_weight_outputs", model.weight_outputs)
-    save_weight(data_str + "train_weight_hidden", model.weight_hidden)
+    save_weight(data_str + "_train_weight_outputs", model.weight_outputs)
+    save_weight(data_str + "_train_weight_hidden", model.weight_hidden)
 
 
 if __name__ == '__main__':
