@@ -3,7 +3,8 @@ import scipy.sparse as sp
 import numpy as np
 import networkx as nx
 import sys
-from layers.original_utils import onehot
+from original.utils import onehot
+
 
 def prepare_gcn():
     # adj, features, labels, train_mask

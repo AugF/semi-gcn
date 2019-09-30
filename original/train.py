@@ -1,7 +1,6 @@
-from layers.original_model import *
-from layers.original_load import *
-from layers.original_metrics import *
-import tensorflow as tf
+from original.model import *
+from original.load import *
+from original.metrics import *
 
 # Set random seed
 seed = 123

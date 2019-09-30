@@ -28,13 +28,3 @@ def numerical_grad(f, X, h=1e-3):
             grad[i, j] = (loss1 - loss2) / (2.0*h)
             X[i, j] += h
     return grad
-
-
-def save_weight(file_str, target):
-    file_path = "../_weights/{}.txt".format(file_str)
-    m, n = target.shape
-    with open(file_path, "w") as f:
-        for i in range(m):
-            for j in range(n):
-                f.write(str(target[i, j]) + " ")
-            f.write("\n")

@@ -1,8 +1,6 @@
-import numpy as np
-from layers.original_weights_preprocess import *
+from original.weights_preprocess import *
 
 # hidden
-
 
 def forward_hidden(adj, hidden, weight_hidden, act=lambda x: x, drop_out=0.5, drop_flag=False):
     """loss the dropout"""
@@ -23,6 +21,3 @@ def backward_hidden(adj, hidden, weight_hidden, pre_layer_grad, backward_act=lam
     dAhat = np.dot(np.multiply(pre_layer_grad, dact), weight_hidden.T)
     dX = np.dot(adj.T, dAhat)
     return dX, dW
-
-
-

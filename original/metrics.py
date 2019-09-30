@@ -1,7 +1,6 @@
-import numpy as np
 import tensorflow as tf
-
-from layers.original_utils import softmax
+import numpy as np
+from original.utils import softmax
 
 def wrapper(x):
     return x.reshape(x.shape[0],)

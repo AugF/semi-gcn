@@ -8,6 +8,15 @@ def init_Weight(shape):
     initial = np.random.uniform(low=-init_range, high=init_range, size=shape)
     return initial
 
+def save_weight(file_str, target):
+    file_path = "../weights/{}.txt".format(file_str)
+    m, n = target.shape
+    with open(file_path, "w") as f:
+        for i in range(m):
+            for j in range(n):
+                f.write(str(target[i, j]) + " ")
+            f.write("\n")
+
 
 def get_Weight_from_file(shape, weight_str):
     m, n = shape
