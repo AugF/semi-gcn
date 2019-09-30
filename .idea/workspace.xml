@@ -2,18 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3f3a8e00-f8ab-4d27-99d9-71e9e35a06df" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/_weights/citeseer_train_weight_hidden.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_weights/citeseer_train_weight_outputs.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_weights/cora_train_weight_hidden.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_weights/cora_train_weight_outputs.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_weights/pubmed_train_weight_hidden.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_weights/pubmed_train_weight_outputs.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/demoSparseTensor.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/_original_data/cora.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/practise.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/original/layers.py" beforeDir="false" afterPath="$PROJECT_DIR$/original/layers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/original/metrics.py" beforeDir="false" afterPath="$PROJECT_DIR$/original/metrics.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/original/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/original/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/original/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/original/train.py" afterDir="false" />
     </list>
     <list id="5f6e0f6d-d706-45c7-92ae-e3d0c0758781" name="loss without weight_decay" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -60,20 +51,21 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/_original_data" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\hikk\PycharmProjects\semi-gnn\_original_data" />
+      <recent name="C:\Users\hikk\PycharmProjects\semi-gnn\gcn\data" />
+      <recent name="C:\Users\hikk\PycharmProjects\semi-gnn\data" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\hikk\PycharmProjects\semi-gnn\gcn" />
       <recent name="C:\Users\hikk\PycharmProjects\semi-gnn" />
       <recent name="C:\Users\hikk\PycharmProjects\semi-gnn\cs231n" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\hikk\PycharmProjects\semi-gnn\gcn\data" />
-      <recent name="C:\Users\hikk\PycharmProjects\semi-gnn\data" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -88,7 +80,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.train">
+  <component name="RunManager" selected="Python.practise">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="semi-gnn" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -174,20 +166,17 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="practise" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="semi-gnn" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tensor" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tensor/test.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/practise.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -217,11 +206,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.practise" />
         <item itemvalue="Python.train" />
         <item itemvalue="Python.demoSparseTensor" />
         <item itemvalue="Python.original_train" />
         <item itemvalue="Python.original_metrics" />
-        <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
   </component>
