@@ -1,10 +1,7 @@
-## 说明
-1. package
-- data: preprocessed by gcn.
-- gcn: the main model
-- layer: practise code for mode
-- tensor: practise code for tensorflow
+# Using numpy to realize the GCN model
 
-## 运行
+python numpy realization of the paper as follows:
 
-python train.py
+Thomas N. Kipf, Max Welling,  [Semi-Supervised Classification with Graph Convolutional Networks](https://arxiv.org/abs/1609.02907) (ICLR 2017)
+
+!!! recent version is without dropout and sparse matrix.
